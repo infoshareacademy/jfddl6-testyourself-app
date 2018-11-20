@@ -5,7 +5,7 @@ import AddFavourite from './views/AddFavourite/AddFavourite'
 import AddTests from './views/AddTests/AddTests'
 import AvailableTests from './views/AvailableTests/AvailableTests'
 import FavouriteTestsList from './views/FavouriteTestsList/FavouriteTestsList'
-import FoundTests from './views/FoundTests/FoundTests'
+import FoundTests from './views/List/FoundTests/FoundTests'
 import List from './views/List/List'
 import Navigation from './Navigation/Navigation'
 
