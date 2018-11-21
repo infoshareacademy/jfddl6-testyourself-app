@@ -1,26 +1,58 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import AddFavouriteView from './views/AddFavouriteView/AddFavouriteView'
+import AddTestsView from './views/AddTestsView/AddTestsView'
+import AvailableTestsView from './views/AvailableTestsView/AvailableTestsView'
+import FavouriteTestsListView from './views/FavouriteTestsListView/FavouriteTestsListView'
+import ListView from './views/ListView/ListView'
+import Navigation from './Navigation/Navigation'
+import MenuItem from './Navigation/MenuItem'
+import DashboardView from './views/DashboardView/DashboardView';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider>
+        <Router>
+          <div>
+            <Navigation title="testYourself-App!">
+              <MenuItem
+                to="/dashboard"
+                text="Home"
+              />
+              <MenuItem
+                to="/list"
+                text="List"
+              />
+              <MenuItem
+                to="/favourite-tests-list"
+                text="Favourite tests list"
+              />
+                <MenuItem
+                  to="/add-tests"
+                  text="Add tests"
+                />
+              <MenuItem
+                to="/available-tests"
+                text="Available tests"
+              />
+              <MenuItem
+                to="/add-favourite"
+                text="Add favourite"
+              />
+            </Navigation>
+            <Route path="/dashboard" component={DashboardView} />
+            <Route path="/list" component={ListView} />
+            <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
+            <Route path="/add-tests" component={AddTestsView} />
+            <Route path="/available-tests" component={AvailableTestsView} />
+            <Route path="/add-favourite" component={AddFavouriteView} />
+          </div>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }
