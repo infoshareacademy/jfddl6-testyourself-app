@@ -10,6 +10,7 @@ import FavouriteTestsListView from './views/FavouriteTestsListView/FavouriteTest
 import ListView from './views/ListView/ListView'
 import Navigation from './Navigation/Navigation'
 import MenuItem from './Navigation/MenuItem'
+import DashboardView from './views/DashboardView/DashboardView';
 
 class App extends Component {
   render() {
@@ -19,31 +20,36 @@ class App extends Component {
           <div>
             <Navigation title="testYourself-App!">
               <MenuItem
-                to="/add-favourite"
-                text="Add favourite"
-              />
-              <MenuItem
-                to="/add-tests"
-                text="Add tests"
-              />
-              <MenuItem
-                to="/available-tests"
-                text="Available tests"
-              />
-              <MenuItem
-                to="/favourite-tests-list"
-                text="Favourite tests list"
+                to="/dashboard"
+                text="Home"
               />
               <MenuItem
                 to="/list"
                 text="List"
               />
+              <MenuItem
+                to="/favourite-tests-list"
+                text="Favourite tests list"
+              />
+                <MenuItem
+                  to="/add-tests"
+                  text="Add tests"
+                />
+              <MenuItem
+                to="/available-tests"
+                text="Available tests"
+              />
+              <MenuItem
+                to="/add-favourite"
+                text="Add favourite"
+              />
             </Navigation>
-            <Route path="/add-favourite" component={AddFavouriteView} />
+            <Route path="/dashboard" component={DashboardView} />
+            <Route path="/list" component={ListView} />
+            <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
             <Route path="/add-tests" component={AddTestsView} />
             <Route path="/available-tests" component={AvailableTestsView} />
-            <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
-            <Route path="/list" component={ListView} />
+            <Route path="/add-favourite" component={AddFavouriteView} />
           </div>
         </Router>
       </MuiThemeProvider>
