@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import Drawer from 'material-ui/Drawer'
 
 const Sidebar = (props) => (
-    <div>
-        Sidebar
-    </div>
+    <Drawer
+        docked={props.docked}
+        width={props.width}
+        open={props.open}
+        onRequestChange={props.onRequestChange}
+    >
+        {props.children}
+    </Drawer>
 )
 
 export default Sidebar

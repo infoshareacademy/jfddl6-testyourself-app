@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AddFavourite = (props) => (
+const AddFavouriteView = (props) => (
     <div>
-        AddFavourite
+        AddFavouriteView
     </div>
 )
 
-export default AddFavourite
+export default AddFavouriteView

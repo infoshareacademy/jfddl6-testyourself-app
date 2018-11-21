@@ -1,9 +1,34 @@
-import React from 'react';
+import React from 'react'
 
-const Navigation = (props) => (
-    <div>
-        Navigation
-    </div>
-)
+import AppBar from './AppBar.js'
+
+import SideBar from './Sidebar.js'
+
+class Navigation extends React.Component {
+    state = {
+        isDrawerOpen: false
+    }
+
+    toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
+
+    render() {
+        return (
+            <div>
+                <AppBar
+                    title={this.props.title}
+                    onLeftIconButtonClick={this.toggleDrawer}
+                />
+                <SideBar
+                    docked={false}
+                    width={200}
+                    open={this.state.isDrawerOpen}
+                    onRequestChange={this.toggleDrawer}
+                >
+                    {this.props.children}
+                </SideBar>
+            </div>
+        )
+    }
+}
 
 export default Navigation
