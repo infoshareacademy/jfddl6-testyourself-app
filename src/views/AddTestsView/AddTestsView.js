@@ -3,7 +3,10 @@ import React from 'react'
 class AddTestView {
     render() {
         return (
-            AddTestView
+            <div className="container">
+                <h3>React Form</h3>
+                <FormContainer />
+            </div>
         )
     }
 }
