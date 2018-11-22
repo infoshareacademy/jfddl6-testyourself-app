@@ -4,7 +4,7 @@ class AddTestView {
     render() {
         return (
             <div className="container">
-                <h3>AddTestView/h3>
+                <h3>AddTestView</h3>
                 <AddTestContainer />
             </div>
         )
