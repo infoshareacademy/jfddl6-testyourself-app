@@ -4,8 +4,8 @@ class AddTestView {
     render() {
         return (
             <div className="container">
-                <h3>React Form</h3>
-                <FormContainer />
+                <h3>AddTestView/h3>
+                <AddTestContainer />
             </div>
         )
     }
