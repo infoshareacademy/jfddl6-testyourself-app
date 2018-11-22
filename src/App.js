@@ -44,6 +44,7 @@ class App extends Component {
                 text="Add favourite"
               />
             </Navigation>
+            <Route path="/" exact component={DashboardView} />
             <Route path="/dashboard" component={DashboardView} />
             <Route path="/list" component={ListView} />
             <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
