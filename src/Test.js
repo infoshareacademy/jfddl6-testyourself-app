@@ -7,7 +7,7 @@ const data = [{
 },
 {
     category: 'Chemistry',
-    question: 'What is the ligthest element?',
+    question: 'What is the lightest element?',
     answers: ['Carbon', 'Hydrogen', 'Iron', 'Sulphur'],
     rightAnswer: answers[1],
     isFavorite: false
