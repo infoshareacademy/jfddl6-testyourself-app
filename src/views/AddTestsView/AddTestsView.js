@@ -1,9 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-const AddTestView = (props) => (
-    <div>
-        AddTestsView
-    </div>
-)
-
+class AddTestView {
+    render() {
+        return (
+            AddTestView
+        )
+    }
+}
 export default AddTestView
