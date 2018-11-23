@@ -1,25 +1,30 @@
 import React from 'react';
-import Button from './components/Button.js'
+import Button from './Button'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
-const DashboardView = (props) => (
-    <div>
-        <Row>
-            <Col xs />
-            <Col xs />
-            <Col xs />
-        </Row>
-        <Row>
-            <Col xs />
-            <Col xs />
-            <Col xs />
-        </Row>
-        <Button
-        />
-        <Button
-        />
-        <Button
-        />
-    </div>
-)
-
+class DashboardView extends React.Component {
+    render() {
+        return (
+            <div>
+                <Grid>
+                    <Row>
+                        <Col xs={4} />
+                        <Col xs={4} />
+                        <Col xs={4} />
+                    </Row>
+                    <Row>
+                        <Col xs={6} />
+                        <Col xs={6} />
+                    </Row>
+                </Grid>
+                <Button
+                />
+                <Button
+                />
+                <Button
+                />
+            </div>
+        )
+    }
+}
 export default DashboardView
