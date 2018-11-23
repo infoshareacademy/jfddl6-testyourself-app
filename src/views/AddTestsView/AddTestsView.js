@@ -1,13 +1,16 @@
 import React from 'react'
 
-class AddTestView {
+class AddTestView extends Component {
+    state = {
+        category={},
+        question={},
+        answer='',
+        rightAnswer=''
+    }
+
+
     render() {
-        return (
-            <div className="container">
-                <h3>AddTestView</h3>
-                <AddTestContainer />
-            </div>
-        )
+        return ({})
     }
 }
 export default AddTestView
