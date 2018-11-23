@@ -56,18 +56,21 @@ class SearchView extends React.Component {
 
                 </Row>
 
-                <SelectField
-                    floatingLabelText="Frequency"
-                    value={'this.state.value'}
-                    onChange={this.handleChange}
-                    autoWidth={true}
-                >
-                    <MenuItem value={1} primaryText="Auto width" />
-                    <MenuItem value={2} primaryText="Every Night" />
-                    <MenuItem value={3} primaryText="Weeknights" />
-                    <MenuItem value={4} primaryText="Weekends" />
-                    <MenuItem value={5} primaryText="Weekly" />
-                </SelectField>
+                <Row>
+                    <Col xs={12}>
+                        <SelectField
+                            floatingLabelText="Frequency"
+                            value={1}
+                            onChange={this.handleChange}
+                        >
+                            <MenuItem value={1} primaryText="Auto width" />
+                            <MenuItem value={2} primaryText="Every Night" />
+                            <MenuItem value={3} primaryText="Weeknights" />
+                            <MenuItem value={4} primaryText="Weekends" />
+                            <MenuItem value={5} primaryText="Weekly" />
+                        </SelectField>
+                    </Col>
+                </Row>
 
             </Paper >
         )
