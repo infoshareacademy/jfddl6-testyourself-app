@@ -37,51 +37,51 @@ class AddTestView extends Component {
                 style={style.paper}>
                 <Grid fluid>
                     <Row
-                        center="xs">
-                        <Col lg={10} />
+                        center="sm">
+                        <Col lg={8} />
                         <h1>
                             Add Test
                         </h1>
                     </Row>
                     <div>
 
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="Select Category"
                                 fullWidth={true} />
                         </Row>
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="Select Difficulty"
                                 fullWidth={true} />
                         </Row>
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="Select Type"
                                 fullWidth={true} />
                         </Row>
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="Question"
                                 fullWidth={true} />
                         </Row>
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="Answers"
                                 fullWidth={true} />
                         </Row>
-                        <Row center="xs">
-                            <Col lg={10} />
+                        <Row center="sm">
+                            <Col lg={8} />
                             <TextField hintText="CorrectAnswer"
                                 fullWidth={true} />
                         </Row>
                         <div
                             className="AddTestView__AvailableTestView">
-                            <Row center="xs">
-                                <Col lg={12}>
+                            <Row center="sm">
+                                <Col lg={8}>
                                     <SelectField
                                         multiple={true}
-                                        hintText="Choose category"
+                                        hintText="Choose Test"
                                         value={this.state.value}
                                         onChange={this.handlerChange}
                                         fullWidth={true}
@@ -99,7 +99,7 @@ class AddTestView extends Component {
                                 </Col>
                             </Row>
                         </div>
-                        <Row center="xs">
+                        <Row center="sm">
                             <RaisedButton
                                 label="Save"
                                 primary={true}
@@ -109,7 +109,8 @@ class AddTestView extends Component {
                         </Row>
                     </div>
                 </Grid>
-            </Paper>)
+            </Paper>
+            )
     }
 }
 export default AddTestView
