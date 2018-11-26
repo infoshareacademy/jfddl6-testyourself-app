@@ -2,12 +2,12 @@ import React from 'react';
 import Button from './Button'
 import Paper from 'material-ui/Paper'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Link } from 'react-router-dom'
 
-
-const style={
-    paper:{
-        margin:10,
-        padding:10
+const style = {
+    paper: {
+        margin: 10,
+        padding: 10
     }
 }
 
@@ -22,13 +22,15 @@ class DashboardView extends React.Component {
     render() {
         return (
             <Paper
-            style={style.paper}>
+                style={style.paper}>
                 <Grid>
                     <Row middle="xs" center='xs'>
                         <Col lg={4}>
-                            <Button
-                                label={'Go To List'}
-                            />
+                            <Link to='/ListView'>
+                                <Button
+                                    label={'Go To List'}
+                                />
+                            </Link>
                         </Col>
                         <Col lg={4}>
                             <Button
