@@ -2,22 +2,29 @@ import React from 'react';
 import SearchView from './SearchView/SearchView'
 
 
+import { database } from './../../firebase'
 
 import { data } from './tempData'
 import MyList from './MyList'
 import Test from './../../Test'
 
 class ListView extends React.Component {
-    state =(fetch())
+
+    state =
+        {
+            tests: {}
+        }
 
 
-       
+
     componentDidMount() {
+        database.ref().child('tests')
+            .on('value', snapshot => {
+                this.setState({ tests: snapshot.val() })
+                // console.log(this.state.tests)
+            })
 
-        // database.ref().on('value', snapshot => {
-        //   this.setState({usercount: snapshot.val()});
-        // });
-      }
+    }
 
 
     render() {
@@ -25,8 +32,8 @@ class ListView extends React.Component {
             <div>
                 <SearchView />
                 <MyList
-               
-                tests={this.state.tests}
+
+                    tests={this.state.tests}
                 />
             </div>
         )
