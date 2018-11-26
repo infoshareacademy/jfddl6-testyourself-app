@@ -17,20 +17,9 @@ const style = {
 class SearchView extends React.Component {
 
     state = {
-        maxValue: this.props.value || 2,
-        value: 1,
+        maxValue: 5,
+        value: 3,
 
-    }
-
-    onSearchTextInputHandler = (event, value) => {
-
-    }
-
-    componentDidMount() {
-
-        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
-            .then(response => response.json())
-            .then(data => console.log(data))
     }
 
     render() {
@@ -38,11 +27,15 @@ class SearchView extends React.Component {
             <Paper
                 style={style}
             >
-                <TextField
-                    hintText="Search"
-                    style={{ width: '100%' }}
-                    onChange={this.onSearch}
-                />
+                <Row>
+                    <Col xs={12}>
+                        <TextField
+                            hintText="Search"
+                            onChange={this.props.onSearchTextChangeHandler}
+                        />
+                    </Col>
+                </Row>
+
 
                 <Row>
                     <Col xs={12} sm={3} md={2} lg={1} >
@@ -55,6 +48,7 @@ class SearchView extends React.Component {
                             step={1}
                             max={this.state.maxValue}
                             value={this.state.maxValue}
+                            onChange={this.props.onSearchSliderValueChangeHandler}
                         />
 
                     </Col>
@@ -72,7 +66,7 @@ class SearchView extends React.Component {
                         <SelectField
                             floatingLabelText="Categories"
                             value={1}
-                            onChange={this.handleChange}
+                            onChange={this.props.onSearchSelectFieldValueChangeHandler}
                         >
                             <MenuItem
                                 value={1}
@@ -81,11 +75,6 @@ class SearchView extends React.Component {
 
                         </SelectField>
                     </Col>
-                </Row>
-
-                <Row>
-                    {
-                    }
                 </Row>
 
             </Paper >
