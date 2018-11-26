@@ -3,6 +3,17 @@ import Button from './Button'
 import Paper from 'material-ui/Paper'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
+
+const style={
+    paper:{
+        margin:10,
+        padding:10
+    }
+}
+
+
+
+
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth
@@ -10,7 +21,8 @@ class DashboardView extends React.Component {
 
     render() {
         return (
-            <Paper>
+            <Paper
+            style={style.paper}>
                 <Grid>
                     <Row middle="xs" center='xs'>
                         <Col lg={4}>
