@@ -21,7 +21,7 @@ const style = {
     item: {
         float: "left"
     }
-};
+}
 
 
 class AddTestView extends Component {
@@ -38,7 +38,8 @@ class AddTestView extends Component {
                 <Grid fluid>
                     <Row
                         center="sm">
-                        <Col lg={8} />
+                        <Col lg={8}
+                        />
                         <h1>
                             Add Test
                         </h1>
@@ -46,40 +47,51 @@ class AddTestView extends Component {
                     <div>
 
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
                                 hintText="Select Category"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
                                 hintText="Select Difficulty"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
                                 hintText="Select Type"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
                                 hintText="Question"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
                                 hintText="Answers"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
                             <TextField
                                 hintText="CorrectAnswer"
-                                fullWidth={true} />
+                                fullWidth={true}
+                            />
                         </Row>
                         <div
                             className="AddTestView__AvailableTestView">
