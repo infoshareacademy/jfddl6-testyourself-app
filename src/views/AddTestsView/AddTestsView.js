@@ -8,7 +8,7 @@ import MenuItem from "material-ui/MenuItem"
 
 
 
-const categories = ["Select Category", "Select Difficulty", "Select Type", "Question", "Answers", "CorrectAnswer"]
+const categories = ["Category", "Difficulty", "Type", "Question", "Answers", "CorrectAnswer"]
 
 const style = {
     paper: {
@@ -24,7 +24,7 @@ const style = {
 }
 
 
-class AddTestView extends Component {
+class AddTestView extends React.Component {
 
     state = {
         value: null
@@ -94,7 +94,7 @@ class AddTestView extends Component {
                             />
                         </Row>
                         <div
-                            className="AddTestView__ListView">
+                            className="AddTestView">
                             <Row center="sm">
                                 <Col lg={8}>
                                     <SelectField
