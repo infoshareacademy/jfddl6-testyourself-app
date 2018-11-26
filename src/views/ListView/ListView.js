@@ -13,7 +13,7 @@ class ListView extends React.Component {
 
     onSearchTextChangeHandler = (event) => { this.setState({ searchText: event.target.value }) }
 
-    onSearchSliderValueChangeHandler = (event) => { this.setState({ numberOfQuestionsInTest: event.target.value }) }
+    onSearchSliderValueChangeHandler = (event, value) => { this.setState({ numberOfQuestionsInTest: value }) }
 
     onSearchSelectFieldValueChangeHandler = (event) => { this.setState({ categoryFilter: event.target.value }) }
 
@@ -28,12 +28,15 @@ class ListView extends React.Component {
         return (
             <div>
                 <SearchView
+                    numberOfQuestionsInTest={this.state.numberOfQuestionsInTest}
                     onSearchTextChangeHandler={this.onSearchTextChangeHandler}
                     onSearchSliderValueChangeHandler={this.onSearchSliderValueChangeHandler}
                     onSearchSelectFieldValueChangeHandler={this.onSearchSelectFieldValueChangeHandler}
                 />
                 <div>
-                    {console.log(this.state.tests)}
+                    {this.state.numberOfQuestionsInTest}
+                    {this.state.categoryFilter}
+                    {this.state.searchText}
                 </div>
             </div>
         )

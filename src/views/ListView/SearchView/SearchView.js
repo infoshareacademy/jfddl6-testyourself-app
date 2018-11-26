@@ -18,8 +18,7 @@ class SearchView extends React.Component {
 
     state = {
         maxValue: 5,
-        value: 3,
-
+        value: this.props.numberOfQuestionsInTest
     }
 
     render() {
@@ -47,7 +46,7 @@ class SearchView extends React.Component {
                         <Slider
                             step={1}
                             max={this.state.maxValue}
-                            value={this.state.maxValue}
+                            value={this.state.value}
                             onChange={this.props.onSearchSliderValueChangeHandler}
                         />
 
