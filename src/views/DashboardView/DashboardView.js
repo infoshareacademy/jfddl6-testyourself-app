@@ -33,9 +33,11 @@ class DashboardView extends React.Component {
                             </Link>
                         </Col>
                         <Col lg={4}>
-                            <Button
-                                label={'Go To Favourites'}
-                            />
+                            <Link to='/FavouriteTestsListView'>
+                                <Button
+                                    label={'Go To Favourites'}
+                                />
+                            </Link>
                         </Col>
                         <Col lg={4}>
                             <Button
