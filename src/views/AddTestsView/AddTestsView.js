@@ -1,6 +1,6 @@
 import React from 'react'
 
-const categories = ["categorys", "question", "answers","corectAnswer",]
+const categories = ["categories", "question", "answers","correctAnswer",]
 
 const style = {
     paper: {
@@ -21,7 +21,7 @@ class AddTestView extends Component {
     state = {
         value: null
     }
-
+    handlerChange = (event, index, value) => this.setState({ value: value })
 
     render() {
         return ({})
