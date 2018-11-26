@@ -8,14 +8,26 @@ import MyList from './MyList'
 import Test from './../../Test'
 
 class ListView extends React.Component {
-    state = {
+    state =(fetch())
 
-    }
+
+       
+    componentDidMount() {
+
+        // database.ref().on('value', snapshot => {
+        //   this.setState({usercount: snapshot.val()});
+        // });
+      }
+
+
     render() {
         return (
             <div>
                 <SearchView />
-                <MyList/>
+                <MyList
+               
+                tests={this.state.tests}
+                />
             </div>
         )
     }
