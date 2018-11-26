@@ -94,7 +94,7 @@ class AddTestView extends Component {
                             />
                         </Row>
                         <div
-                            className="AddTestView__AvailableTestView">
+                            className="AddTestView__ListView">
                             <Row center="sm">
                                 <Col lg={8}>
                                     <SelectField
