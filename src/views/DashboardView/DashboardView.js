@@ -15,17 +15,17 @@ class DashboardView extends React.Component {
                     <Row middle="xs" center='xs'>
                         <Col lg={4}>
                             <Button
-                                label={'list'}
+                                label={'Go To List'}
                             />
                         </Col>
                         <Col lg={4}>
                             <Button
-                                label={'favourite'}
+                                label={'Go To Favourites'}
                             />
                         </Col>
                         <Col lg={4}>
                             <Button
-                                label={'add'}
+                                label={'Add New Test'}
                             />
                         </Col>
                     </Row>

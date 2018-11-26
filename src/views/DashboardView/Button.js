@@ -9,9 +9,10 @@ import React from 'react'
  const Button = (props) => (
   <div>
     <RaisedButton
-      label="Primary"
-      secondary={true}
+      label={props.label}
+      primary={true}
       style={style}
+      onClick={props.onClick}
     />
   </div>
 )
