@@ -4,10 +4,11 @@ import SearchView from './SearchView/SearchView'
 
 const ListView = (props) => (
     <div>
-        <SearchView />
-        <div>
-        ListView
+        <SearchView
 
+        />
+        <div>
+            ListView
         </div>
     </div>
 )

@@ -21,7 +21,17 @@ class SearchView extends React.Component {
         value: 1,
 
     }
-    handleChange = (event, index, value) => this.setState({ value })
+
+    onSearchTextInputHandler = (event, value) => {
+
+    }
+
+    componentDidMount() {
+
+        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }
 
     render() {
         return (
@@ -31,6 +41,7 @@ class SearchView extends React.Component {
                 <TextField
                     hintText="Search"
                     style={{ width: '100%' }}
+                    onChange={this.onSearch}
                 />
 
                 <Row>
@@ -59,17 +70,22 @@ class SearchView extends React.Component {
                 <Row>
                     <Col xs={12}>
                         <SelectField
-                            floatingLabelText="Frequency"
+                            floatingLabelText="Categories"
                             value={1}
                             onChange={this.handleChange}
                         >
-                            <MenuItem value={1} primaryText="Auto width" />
-                            <MenuItem value={2} primaryText="Every Night" />
-                            <MenuItem value={3} primaryText="Weeknights" />
-                            <MenuItem value={4} primaryText="Weekends" />
-                            <MenuItem value={5} primaryText="Weekly" />
+                            <MenuItem
+                                value={1}
+                                primaryText="Category"
+                            />
+
                         </SelectField>
                     </Col>
+                </Row>
+
+                <Row>
+                    {
+                    }
                 </Row>
 
             </Paper >
