@@ -19,7 +19,7 @@ const style = {
         marginTop: 20
     },
     item: {
-        float: "left"
+        float: "center"
     }
 }
 
