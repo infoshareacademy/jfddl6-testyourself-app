@@ -29,7 +29,7 @@ class AddTestView extends Component {
     state = {
         value: null
     }
-    handlerChange = (event, index, value) => this.setState({ value: value })
+    handlerChange = (test, index, value) => this.setState({ value: value })
 
     render() {
         return (
@@ -47,32 +47,38 @@ class AddTestView extends Component {
 
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="Select Category"
+                            <TextField
+                                hintText="Select Category"
                                 fullWidth={true} />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="Select Difficulty"
+                            <TextField
+                                hintText="Select Difficulty"
                                 fullWidth={true} />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="Select Type"
+                            <TextField
+                                hintText="Select Type"
                                 fullWidth={true} />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="Question"
+                            <TextField
+                                hintText="Question"
                                 fullWidth={true} />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="Answers"
+                            <TextField
+                                hintText="Answers"
                                 fullWidth={true} />
                         </Row>
                         <Row center="sm">
                             <Col lg={8} />
-                            <TextField hintText="CorrectAnswer"
+                            <TextField
+                                hintText="CorrectAnswer"
                                 fullWidth={true} />
                         </Row>
                         <div
@@ -110,7 +116,7 @@ class AddTestView extends Component {
                     </div>
                 </Grid>
             </Paper>
-            )
+        )
     }
 }
 export default AddTestView
