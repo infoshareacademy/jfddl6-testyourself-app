@@ -40,9 +40,11 @@ class DashboardView extends React.Component {
                             </Link>
                         </Col>
                         <Col lg={4}>
-                            <Button
-                                label={'Add New Test'}
-                            />
+                            <Link to='/AddTestsView'>
+                                <Button
+                                    label={'Add New Test'}
+                                />
+                            </Link>
                         </Col>
                     </Row>
                     <Row middle="xs" center='xs'>
