@@ -1,10 +1,12 @@
 import React from 'react'
 
-import Checkbox from 'material-ui/Checkbox';
+import Avatar from 'material-ui/Avatar';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
+
+import placeholder from '../../images/atom.svg'
 
 
 const MyList = (props) => (
@@ -18,7 +20,7 @@ const MyList = (props) => (
             <ListItem
                 key={test.id}
                 primaryText={test.description}
-                leftCheckbox={<Checkbox />}
+                leftAvatar={<Avatar src={test.img || placeholder} />}
                 rightIconButton={
                     <IconButton>
                         <DeleteIcon onClick={() => alert('removeClicked')} />
