@@ -27,13 +27,13 @@ const style = {
 }
 
 const initialState = {
-        value: "",
-        category: "",
-        difficulty: "",
-        type: "",
-        question: "",
-        answer: ""
-    
+    value: "",
+    category: "",
+    difficulty: "",
+    type: "",
+    question: "",
+    answer: ""
+
 }
 
 class AddTestView extends React.Component {
@@ -41,12 +41,12 @@ class AddTestView extends React.Component {
     constructor(props) {
         super(props)
         this.state = initialState
-      }
-    
+    }
+
 
     categoryChange = (event) => this.setState({ category: event.target.value })
-    difficultyChange = (event) => this.setState({ difficulty: event.target.value})
-    typeChange =(event) => this.setState ({ type: event.target.value })
+    difficultyChange = (event) => this.setState({ difficulty: event.target.value })
+    typeChange = (event) => this.setState({ type: event.target.value })
 
 
     render() {
@@ -115,15 +115,15 @@ class AddTestView extends React.Component {
                                     onChange={this.typeChange}
                                     fullWidth={true}
                                 >
-                                {type.map(type => (
-                                    <MenuItem
-                                        key={type}
-                                        insetChildren={true}
-                                        value={type}
-                                        primaryText={type}
-                                        styles={style.button}
-                                    />
-                                ))}
+                                    {type.map(type => (
+                                        <MenuItem
+                                            key={type}
+                                            insetChildren={true}
+                                            value={type}
+                                            primaryText={type}
+                                            styles={style.button}
+                                        />
+                                    ))}
                                 </SelectField>
                             </Col>
                         </Row>
