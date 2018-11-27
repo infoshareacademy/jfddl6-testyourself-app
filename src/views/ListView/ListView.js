@@ -40,9 +40,7 @@ class ListView extends React.Component {
                 />
 
                 <div>
-                    {this.state.numberOfQuestionsInTest}
-                    {this.state.categoryFilter}
-                    {this.state.searchText}
+
                 </div>
             </div>
         )
