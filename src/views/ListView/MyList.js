@@ -7,30 +7,40 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 
 import placeholder from '../../images/atom.svg'
+import Paper from 'material-ui/Paper'
 
-
-
+const style={
+    margin: 20,
+    padding: 20
+}
 const MyList = (props) => (
+<Paper 
+    style={style}
+>
+<List>
 
-    <List>
+{console.log(props.tests)}
+< Subheader > Available Tests</Subheader>
 
-        {console.log(props.tests)}
-        < Subheader > Available Tests</Subheader>
+{   
+    props.tests &&
+    props.tests.map&&
+    props.tests.map(test => (
+    <ListItem
+        key={test.id}
+        primaryText={test.description}
+        leftAvatar={<Avatar src={test.img || placeholder} />}
+        rightIconButton={
+            <IconButton>
+                <FavoriteIcon onClick={() => alert('fav')} />
+            </IconButton>
+        }
+    />
+))}
 
-        {props.tests.map(test => (
-            <ListItem
-                key={test.id}
-                primaryText={test.description}
-                leftAvatar={<Avatar src={test.img || placeholder} />}
-                rightIconButton={
-                    <IconButton>
-                        <FavoriteIcon onClick={() => alert('fav')} />
-                    </IconButton>
-                }
-            />
-        ))}
-
-    </List >
+</List >
+</Paper>
+   
 )
 
 export default MyList

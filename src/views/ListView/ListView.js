@@ -5,12 +5,22 @@ import SearchView from './SearchView/SearchView'
 import MyList from './MyList'
 
 class ListView extends React.Component {
-    state =
-        {
-            tests: []
-        }
+    state = {
+        tests: null,
+        searchText: '',
+        searchedNumberOfQuestionsInTest: 3,
+        maxSearchedNumberOfQuestionsInTest: 5,
+        chosenCategoryFilter: 0,
+        categoryFilters: ['Any', "Science Computers", "Animals", "Geography", "Mythology"]
+    }
+    onSearchTextChangeHandler = (event) => { this.setState({ searchText: event.target.value }) }
+
+    onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
+
+    onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
     componentWillMount() {
+
         fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
             .then(response => response.json())
             .then(data => {
@@ -18,10 +28,10 @@ class ListView extends React.Component {
                     this.setState({ tests: [] })
                     return
                 }
-                const testsArray = Object.entries(data)//zamiana na tablice index=1 klucz=0
-                console.log('testArray',testsArray)
+                const testsArray = Object.entries(data)
+                console.log('testArray', testsArray)
                 const testList = testsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc w obiekcie testy
+                    values.id = id //nowa wlasciwosc id w obiekcie testy 
                     return values
                 })
                 this.setState({ tests: testList })
@@ -32,7 +42,19 @@ class ListView extends React.Component {
     render() {
         return (
             <div>
-                <SearchView />
+                <SearchView
+
+                    searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
+                    maxSearchedNumberOfQuestionsInTest={this.state.maxSearchedNumberOfQuestionsInTest}
+
+                    onSearchTextChangeHandler={this.onSearchTextChangeHandler}
+
+                    onSearchSliderValueChangeHandler={this.onSearchSliderValueChangeHandler}
+                    onSearchSelectFieldValueChangeHandler={this.onSearchSelectFieldValueChangeHandler}
+                    categoryFilters={this.state.categoryFilters}
+                    chosenCategoryFilter={this.state.chosenCategoryFilter}
+
+                />
                 <MyList
                     tests={this.state.tests}
                 />
