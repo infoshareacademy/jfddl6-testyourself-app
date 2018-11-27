@@ -19,12 +19,7 @@ class ListView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
-    componentDidMount() {
 
-        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
-            .then(response => response.json())
-            .then(data => this.setState({ tests: data }))
-    }
 
     render() {
         return (
