@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Avatar from 'material-ui/Avatar';
-
 import FavoriteIconUnchecked from 'material-ui/svg-icons/action/favorite-border';
 import FavoriteIconChecked from 'material-ui/svg-icons/action/favorite';
 import { List, ListItem } from 'material-ui/List';
@@ -40,9 +39,9 @@ const MyList = (props) => (
                             rightIconButton={
                                 <IconButton>
                                     {test.favorite ?
-                                        <FavoriteIconChecked onClick={() => alert('favorite')} />
+                                        <FavoriteIconChecked onClick={props.toggleFavorite} />
                                         :
-                                        <FavoriteIconUnchecked onClick={() => alert('not favorite')} />
+                                        <FavoriteIconUnchecked onClick={props.toggleFavorite} />
                                     }
                                 </IconButton>
                             }

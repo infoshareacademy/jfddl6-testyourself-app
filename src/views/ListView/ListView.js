@@ -20,6 +20,11 @@ class ListView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
+    onFavoriteChangeHandler =()=>{
+        //add db favorite update 
+        console.log('klinkniete')}
+    
+
     componentWillMount() {
 
         fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
@@ -59,7 +64,7 @@ class ListView extends React.Component {
                 <MyList
                     searchText={this.state.searchText}
                     tests={this.state.tests}
-                    isFavoriteTest={this.state.isFavoriteTest}
+                    toggleFavorite={this.onFavoriteChangeHandler}
                 />
             </div>
         )
