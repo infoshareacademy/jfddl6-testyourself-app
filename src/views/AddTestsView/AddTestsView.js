@@ -26,17 +26,23 @@ const style = {
     }
 }
 
+const initialState = {
+        value: "",
+        category: "",
+        difficulty: "",
+        type: "",
+        question: "",
+        answer: ""
+    
+}
 
 class AddTestView extends React.Component {
 
-    state = {
-        value: null,
-        category: null,
-        difficulty: null,
-        type: null,
-        question: null,
-        answer: null
-    }
+    constructor(props) {
+        super(props)
+        this.state = initialState
+      }
+    
 
     categoryChange = (event) => this.setState({ category: event.target.value })
     difficultyChange = (event) => this.setState({ difficulty: event.target.value})
