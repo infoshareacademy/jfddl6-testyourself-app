@@ -8,7 +8,10 @@ import MenuItem from "material-ui/MenuItem"
 
 
 
-const categories = ["Category", "Difficulty", "Type", "Question", "Answers", "CorrectAnswer"]
+//const headlines = ["Category", "Difficulty", "Type", "Question", "Correct Answer", "Incorrect Answer"]
+const category = ["Science Computers", "Animals", "Geography", "Mythology",]
+const difficulty = ["easy", "medium", "hard"]
+const type = ["multiple", "open"]
 
 const style = {
     paper: {
@@ -27,9 +30,18 @@ const style = {
 class AddTestView extends React.Component {
 
     state = {
-        value: null
+        value: null,
+        category: null,
+        difficulty: null,
+        type: null,
+        question: null,
+        answer: null
     }
-    handlerChange = (test, index, value) => this.setState({ value: value })
+
+    categoryChange = (event) => this.setState({ category: event.target.value })
+    difficultyChange = (event) => this.setState({ difficulty: event.target.value})
+    typeChange =(event) => this.setState ({ type: event.target.value })
+
 
     render() {
         return (
@@ -47,28 +59,67 @@ class AddTestView extends React.Component {
                     <div>
 
                         <Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Select Category"
-                                fullWidth={true}
-                            />
+                            <Col lg={8}>
+                                <SelectField
+                                    multiple={true}
+                                    hintText="Category"
+                                    value={this.state.value}
+                                    onChange={this.categoryChange}
+                                    fullWidth={true}
+                                >
+                                    {category.map(category => (
+                                        <MenuItem
+                                            key={category}
+                                            insetChildren={true}
+                                            value={category}
+                                            primaryText={category}
+                                            styles={style.button}
+                                        />
+                                    ))}
+                                </SelectField>
+                            </Col>
                         </Row>
                         <Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Select Difficulty"
-                                fullWidth={true}
-                            />
+                            <Col lg={8}>
+                                <SelectField
+                                    multiple={true}
+                                    hintText="Difficulty"
+                                    value={this.state.value}
+                                    onChange={this.difficultyChange}
+                                    fullWidth={true}
+                                >
+                                    {difficulty.map(difficulty => (
+                                        <MenuItem
+                                            key={difficulty}
+                                            insetChildren={true}
+                                            value={difficulty}
+                                            primaryText={difficulty}
+                                            styles={style.button}
+                                        />
+                                    ))}
+                                </SelectField>
+                            </Col>
                         </Row>
                         <Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Select Type"
-                                fullWidth={true}
-                            />
+                            <Col lg={8}>
+                                <SelectField
+                                    multiple={true}
+                                    hintText="Type"
+                                    value={this.state.value}
+                                    onChange={this.typeChange}
+                                    fullWidth={true}
+                                >
+                                {type.map(type => (
+                                    <MenuItem
+                                        key={type}
+                                        insetChildren={true}
+                                        value={type}
+                                        primaryText={type}
+                                        styles={style.button}
+                                    />
+                                ))}
+                                </SelectField>
+                            </Col>
                         </Row>
                         <Row center="sm">
                             <Col lg={8}
@@ -79,44 +130,34 @@ class AddTestView extends React.Component {
                             />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8}
-                            />
+                            <Col lg={8} />
                             <TextField
-                                hintText="Answers"
+                                hintText="Correct Answer"
                                 fullWidth={true}
                             />
                         </Row>
                         <Row center="sm">
-                            <Col lg={8} />
+                            <Col lg={8}
+                            />
                             <TextField
-                                hintText="CorrectAnswer"
+                                hintText="Incorrect Answer"
+                                fullWidth={true}
+                            />
+                        </Row><Row center="sm">
+                            <Col lg={8}
+                            />
+                            <TextField
+                                hintText="Incorrect Answer"
+                                fullWidth={true}
+                            />
+                        </Row><Row center="sm">
+                            <Col lg={8}
+                            />
+                            <TextField
+                                hintText="Incorrect Answer"
                                 fullWidth={true}
                             />
                         </Row>
-                        <div
-                            className="AddTestView">
-                            <Row center="sm">
-                                <Col lg={8}>
-                                    <SelectField
-                                        multiple={true}
-                                        hintText="Choose Test"
-                                        value={this.state.value}
-                                        onChange={this.handlerChange}
-                                        fullWidth={true}
-                                    >
-                                        {categories.map(category => (
-                                            <MenuItem
-                                                key={category}
-                                                insetChildren={true}
-                                                value={category}
-                                                primaryText={category}
-                                                styles={style.button}
-                                            />
-                                        ))}
-                                    </SelectField>
-                                </Col>
-                            </Row>
-                        </div>
                         <Row center="sm">
                             <RaisedButton
                                 label="Save"
