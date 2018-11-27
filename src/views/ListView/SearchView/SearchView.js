@@ -24,7 +24,7 @@ class SearchView extends React.Component {
                 <Row>
                     <Col xs={12}>
                         <TextField
-                            hintText="Search"
+                            floatingLabelText="Search"
                             onChange={this.props.onSearchTextChangeHandler}
                         />
                     </Col>

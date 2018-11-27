@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
 
-// import { database } from './../../firebase'
+
 import MyList from './MyList'
 
 class ListView extends React.Component {
@@ -43,7 +43,7 @@ class ListView extends React.Component {
         return (
             <div>
                 <SearchView
-
+                    
                     searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
                     maxSearchedNumberOfQuestionsInTest={this.state.maxSearchedNumberOfQuestionsInTest}
 
@@ -56,6 +56,7 @@ class ListView extends React.Component {
 
                 />
                 <MyList
+                    searchText={this.state.searchText}
                     tests={this.state.tests}
                 />
             </div>
