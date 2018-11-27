@@ -16,11 +16,6 @@ const style = {
 
 class SearchView extends React.Component {
 
-    state = {
-        maxValue: 5,
-        value: this.props.numberOfQuestionsInTest
-    }
-
     render() {
         return (
             <Paper
@@ -37,25 +32,24 @@ class SearchView extends React.Component {
 
 
                 <Row>
-                    <Col xs={12} sm={3} md={2} lg={1} >
+                    {/* <Col xs={12} sm={3} md={2} lg={1} >
                         <h1>
                             {this.props.numberOfAnswers || 0}
                         </h1>
-                    </Col>
-                    <Col xs={6} sm={6} md={8} lg={10} >
+                    </Col> */}
+                    <Col xs={12} sm={9} md={10} lg={11} >
                         <Slider
                             step={1}
-                            max={this.state.maxValue}
-                            value={this.state.value}
+                            max={this.props.maxSearchedNumberOfQuestionsInTest}
+                            value={this.props.searchedNumberOfQuestionsInTest}
                             onChange={this.props.onSearchSliderValueChangeHandler}
                         />
 
                     </Col>
-                    <Col xs={6} sm={3} md={2} lg={1} >
+                    <Col xs={12} sm={3} md={2} lg={1} >
                         <h1>
-                            {this.props.numberOfAnswers || 0}
+                            {this.props.searchedNumberOfQuestionsInTest || 0}
                         </h1>
-
                     </Col>
 
                 </Row>
@@ -64,13 +58,17 @@ class SearchView extends React.Component {
                     <Col xs={12}>
                         <SelectField
                             floatingLabelText="Categories"
-                            value={1}
+                            value={this.props.chosenCategoryFilter + 1}
                             onChange={this.props.onSearchSelectFieldValueChangeHandler}
                         >
-                            <MenuItem
-                                value={1}
-                                primaryText="Category"
-                            />
+                            {console.log(this.props.chosenCategoryFilter + 1)}
+                            {this.props.categoryFilters.map((filter, index) => (
+                                <MenuItem
+                                    key={index}
+                                    value={index + 1}
+                                    primaryText={filter}
+                                />
+                            ))}
 
                         </SelectField>
                     </Col>
