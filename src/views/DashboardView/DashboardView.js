@@ -3,6 +3,7 @@ import Button from './Button'
 import Paper from 'material-ui/Paper'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router-dom'
+import PieChart from './PieChart'
 
 const style = {
     paper: {
@@ -50,6 +51,9 @@ class DashboardView extends React.Component {
                     <Row middle="xs" center='xs'>
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
+                            <PieChart
+                            viewportWidth={this.state.viewportWidth}
+                            />
                             </Row>
                         </Col>
                         <Col lg={6}>
