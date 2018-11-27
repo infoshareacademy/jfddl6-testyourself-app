@@ -6,6 +6,7 @@ import MyList from './MyList'
 
 class ListView extends React.Component {
     state = {
+        isFavoriteTest:false,
         tests: null,
         searchText: '',
         searchedNumberOfQuestionsInTest: 3,
@@ -58,6 +59,7 @@ class ListView extends React.Component {
                 <MyList
                     searchText={this.state.searchText}
                     tests={this.state.tests}
+                    isFavoriteTest={this.state.isFavoriteTest}
                 />
             </div>
         )
