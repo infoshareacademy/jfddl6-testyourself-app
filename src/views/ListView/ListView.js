@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
-import { database } from '../../firebase'
+// import { database } from '../../firebase'
 
 import MyList from './MyList'
 
@@ -72,6 +72,7 @@ class ListView extends React.Component {
                 <MyList
                     searchText={this.state.searchText}
                     tests={this.state.tests}
+                    
                     toggleFavorite={this.onFavoriteChangeHandler}
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
                     categoryFilters={this.state.categoryFilters}

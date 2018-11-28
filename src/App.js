@@ -18,7 +18,8 @@ class App extends Component {
       <MuiThemeProvider>
         <Router>
           <div>
-            <Navigation title="testYourself-App!">
+            <Navigation
+            title="#testYourself-App">
               <MenuItem
                 to="/dashboard"
                 text="Home"

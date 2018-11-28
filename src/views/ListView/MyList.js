@@ -36,6 +36,9 @@ const MyList = (props) => (
                             true :
                             unifyString(test.category) === unifyString(props.categoryFilters[props.chosenCategoryFilter])
                     ))
+                    .filter((test) => (
+                        Object.keys(test.questions).length === props.searchedNumberOfQuestionsInTest
+                    ))
                     .map(test => (
                         <ListItem
                             key={test.id}
@@ -44,7 +47,7 @@ const MyList = (props) => (
                             rightIconButton={
                                 <IconButton>
                                     {test.favorite ?
-                                        <FavoriteIconChecked onClick={() => props.toggleFavorite(test)} />
+                                        <FavoriteIconChecked onClick={() => { console.log(Object.keys(test.questions)); props.toggleFavorite(test) }} />
                                         :
                                         <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
                                     }
