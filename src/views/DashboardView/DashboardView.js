@@ -4,6 +4,8 @@ import Paper from 'material-ui/Paper'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
+import BarChart from './BarChart'
+
 
 const style = {
     paper: {
@@ -14,11 +16,25 @@ const style = {
 
 
 
-
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth
     }
+
+    componentDidMount() {
+        window.addEventListener(
+            'resize',
+            this.resizeListener
+        )
+    }
+
+    resizeListener = () => {
+        console.log(window.innerWidth)
+        this.setState({
+            viewportWidth: window.innerWidth
+        })
+    }
+
 
     render() {
         return (
@@ -51,13 +67,16 @@ class DashboardView extends React.Component {
                     <Row middle="xs" center='xs'>
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
-                            <PieChart
-                            viewportWidth={this.state.viewportWidth}
-                            />
+                                <PieChart
+                                    viewportWidth={this.state.viewportWidth}
+                                />
                             </Row>
                         </Col>
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
+                                <BarChart
+                                    viewportWidth={this.state.viewportWidth}
+                                />
                             </Row>
                         </Col>
                     </Row>
@@ -66,6 +85,13 @@ class DashboardView extends React.Component {
 
         )
     }
+
+    componentWillUnmount() {
+        window.removeEventListener(
+            'resize',
+            this.resizeListener
+        )
+    }
 }
 
-export default DashboardView
+    export default DashboardView
