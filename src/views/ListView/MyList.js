@@ -46,6 +46,7 @@ const MyList = (props) => (
                             key={test.id}
                             primaryText={test.description}
                             leftAvatar={<Avatar src={test.img || placeholder} />}
+                            onClick={props.onClickListItemHandler}
                             rightIconButton={
                                 <IconButton>
                                     {test.favorite ?

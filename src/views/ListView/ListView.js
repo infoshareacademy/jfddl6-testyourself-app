@@ -19,6 +19,8 @@ class ListView extends React.Component {
     onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
+    
+    onClickListItemHandler=()=>{}//adddddddddddddddd
 
     onFavoriteChangeHandler = (test) => {
         fetch(
@@ -72,7 +74,7 @@ class ListView extends React.Component {
                 <MyList
                     searchText={this.state.searchText}
                     tests={this.state.tests}
-                    
+                    onClickListItemHandler={this.onClickListItemHandler}
                     toggleFavorite={this.onFavoriteChangeHandler}
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
                     categoryFilters={this.state.categoryFilters}
