@@ -14,6 +14,8 @@ const style = {
     margin: 20,
     padding: 20
 }
+
+
 const MyList = (props) => (
 
 
@@ -21,7 +23,7 @@ const MyList = (props) => (
         style={style}
     >
         <List>
-            {/* {console.log('aaa', props.tests)} */}
+           
             < Subheader > Available Tests</Subheader>
             {
                 props.tests &&
@@ -37,7 +39,7 @@ const MyList = (props) => (
                             unifyString(test.category) === unifyString(props.categoryFilters[props.chosenCategoryFilter])
                     ))
                     .filter((test) => (
-                        Object.keys(test.questions).length === props.searchedNumberOfQuestionsInTest
+                        props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
                         <ListItem
@@ -47,7 +49,7 @@ const MyList = (props) => (
                             rightIconButton={
                                 <IconButton>
                                     {test.favorite ?
-                                        <FavoriteIconChecked onClick={() => { console.log(Object.keys(test.questions)); props.toggleFavorite(test) }} />
+                                        <FavoriteIconChecked onClick={() =>  props.toggleFavorite(test) } />
                                         :
                                         <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
                                     }
