@@ -61,7 +61,7 @@ class SearchView extends React.Component {
                             value={this.props.chosenCategoryFilter + 1}
                             onChange={this.props.onSearchSelectFieldValueChangeHandler}
                         >
-                            {console.log(this.props.chosenCategoryFilter + 1)}
+                            {/* {console.log(this.props.chosenCategoryFilter + 1)} */}
                             {this.props.categoryFilters.map((filter, index) => (
                                 <MenuItem
                                     key={index}

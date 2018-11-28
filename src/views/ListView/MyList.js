@@ -21,7 +21,7 @@ const MyList = (props) => (
         style={style}
     >
         <List>
-            {console.log('aaa', props.tests)}
+            {/* {console.log('aaa', props.tests)} */}
             < Subheader > Available Tests</Subheader>
             {
                 props.tests &&
@@ -30,6 +30,11 @@ const MyList = (props) => (
                     .filter((test) => (
                         unifyString(test.description)
                             .includes(unifyString(props.searchText))
+                    ))
+                    .filter((test) => (
+                        (props.chosenCategoryFilter === 0) ?
+                            true :
+                            unifyString(test.category) === unifyString(props.categoryFilters[props.chosenCategoryFilter])
                     ))
                     .map(test => (
                         <ListItem

@@ -39,13 +39,13 @@ class ListView extends React.Component {
                     return
                 }
                 const testsArray = Object.entries(data)
-                console.log('testArray', testsArray)
+                // console.log('testArray', testsArray)
                 const testList = testsArray.map(([id, values]) => {
                     values.id = id //nowa wlasciwosc id w obiekcie testy 
                     return values
                 })
                 this.setState({ tests: testList })
-                console.log('testList', testList)
+                // console.log('testList', testList)
             })
     }
 
@@ -73,6 +73,9 @@ class ListView extends React.Component {
                     searchText={this.state.searchText}
                     tests={this.state.tests}
                     toggleFavorite={this.onFavoriteChangeHandler}
+                    chosenCategoryFilter={this.state.chosenCategoryFilter}
+                    categoryFilters={this.state.categoryFilters}
+                    searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
                 />
             </div>
         )
