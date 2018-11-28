@@ -1,12 +1,12 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
-
+import { database } from '../../firebase'
 
 import MyList from './MyList'
 
 class ListView extends React.Component {
     state = {
-        isFavoriteTest:false,
+        isFavoriteTest: false,
         tests: null,
         searchText: '',
         searchedNumberOfQuestionsInTest: 3,
@@ -20,13 +20,17 @@ class ListView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
-    onFavoriteChangeHandler =()=>{
-        //add db favorite update 
-        console.log('klinkniete')}
-    
+    onFavoriteChangeHandler = (test) => {
+        fetch(
+            `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify({ favorite: !test.favorite })
+            }
+        ).then(() => { this.loadData() })
+    }
 
-    componentWillMount() {
-
+    loadData = () => {
         fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
             .then(response => response.json())
             .then(data => {
@@ -45,11 +49,15 @@ class ListView extends React.Component {
             })
     }
 
+    componentWillMount() {
+        this.loadData()
+    }
+
     render() {
         return (
             <div>
                 <SearchView
-                    
+
                     searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
                     maxSearchedNumberOfQuestionsInTest={this.state.maxSearchedNumberOfQuestionsInTest}
 

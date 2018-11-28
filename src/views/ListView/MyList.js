@@ -39,9 +39,9 @@ const MyList = (props) => (
                             rightIconButton={
                                 <IconButton>
                                     {test.favorite ?
-                                        <FavoriteIconChecked onClick={props.toggleFavorite} />
+                                        <FavoriteIconChecked onClick={() => props.toggleFavorite(test)} />
                                         :
-                                        <FavoriteIconUnchecked onClick={props.toggleFavorite} />
+                                        <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
                                     }
                                 </IconButton>
                             }
