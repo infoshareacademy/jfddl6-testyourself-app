@@ -10,8 +10,14 @@ import Paper from 'material-ui/Paper'
 import { Link } from 'react-router-dom'
 
 const style = {
-    margin: 20,
-    padding: 20
+    paper: {
+        margin: 20,
+        padding: 20
+    },
+    link: {
+        textDecoration: "none"
+    }
+
 }
 class FavouriteTestsListView extends React.Component {
     state = {
@@ -51,7 +57,7 @@ class FavouriteTestsListView extends React.Component {
     render() {
         return (
             <Paper
-                style={style}
+                style={style.paper}
             >
                 <List>
                     < Subheader > Favourite Tests</Subheader>
@@ -63,7 +69,7 @@ class FavouriteTestsListView extends React.Component {
                             .map(test => (
 
                                 //podmienic linka do detailed test info karola !!!!!!!!!!!
-                                <Link to='/dashboard'>
+                                <Link to='/dashboard' style={style.link}>
                                 <ListItem
                                     key={test.id}
                                     
