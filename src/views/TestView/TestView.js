@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import Paper from 'material-ui/Paper'
 
 
 class TestView extends React.Component {
@@ -6,9 +7,15 @@ class TestView extends React.Component {
     render() {
 
         return (
-            <div>
-                TestView
-            </div>
+            <Paper>
+                <h1>
+                    <h1>{`Name: `}</h1>
+                    <h2>{`Category: `}</h2>
+                    <h2>{`Number of questions: `}</h2>
+                    <h2>{`Difficulty: `}</h2>
+                    <h3>{`Description: `}</h3>
+                </h1>
+            </Paper>
         )
     }
 }

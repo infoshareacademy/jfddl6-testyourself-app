@@ -19,8 +19,8 @@ class ListView extends React.Component {
     onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
-    
-    onClickListItemHandler=()=>{}//adddddddddddddddd
+
+    onClickListItemHandler = () => { }//adddddddddddddddd
 
     onFavoriteChangeHandler = (test) => {
         fetch(
@@ -43,7 +43,7 @@ class ListView extends React.Component {
                 const testsArray = Object.entries(data)
                 // console.log('testArray', testsArray)
                 const testList = testsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy 
+                    values.id = id //nowa wlasciwosc id w obiekcie testy
                     return values
                 })
                 this.setState({ tests: testList })
