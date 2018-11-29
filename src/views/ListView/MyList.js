@@ -9,22 +9,17 @@ import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 import { unifyString } from './utils'
-import { Link } from 'react-router-dom'
+
 
 const style = {
     paper: {
         margin: 20,
         padding: 20
-    },
-    link: {
-        textDecoration: "none"
     }
 
 }
 
-
 const MyList = (props) => (
-
 
     <Paper
         style={style.paper}
@@ -49,14 +44,11 @@ const MyList = (props) => (
                         props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
-                        //podmienic linka do detailed test info karola !!!!!!!!
-                        <Link to='/dashboard' style={style.link} >
                             <ListItem
-
                                 key={test.id}
                                 primaryText={test.description}
                                 leftAvatar={<Avatar src={test.img || placeholder} />}
-                                onClick={props.onClickListItemHandler}
+                                onClick={()=>props.onClickListItemHandler(test)}
                                 rightIconButton={
                                     <IconButton>
                                         {test.favorite ?
@@ -67,7 +59,6 @@ const MyList = (props) => (
                                     </IconButton>
                                 }
                             />
-                        </Link>
                     ))
             }
         </List >
