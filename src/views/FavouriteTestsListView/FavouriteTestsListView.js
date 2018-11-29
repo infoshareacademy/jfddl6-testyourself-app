@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
+import { Link } from 'react-router-dom'
 
 const style = {
     margin: 20,
@@ -54,15 +55,18 @@ class FavouriteTestsListView extends React.Component {
             >
                 <List>
                     < Subheader > Favourite Tests</Subheader>
-                    {
+                    {   
                         this.state.tests &&
                         this.state.tests.map &&
                         this.state.tests
                             .filter((test) => (test.favorite === true))
                             .map(test => (
+
+                                //podmienic linka do detailed test info karola !!!!!!!!!!!
+                                <Link to='/dashboard'>
                                 <ListItem
                                     key={test.id}
-                                    onClick={()=>{}}/////addddddddddddddddddddddddddddddd
+                                    
                                     primaryText={test.description}
                                     leftAvatar={<Avatar src={test.img || placeholder} />}
                                     rightIconButton={
@@ -70,7 +74,7 @@ class FavouriteTestsListView extends React.Component {
                                             <FavoriteIconChecked onClick={() => this.removeFromFavouriteListHandler(test)} />
                                         </IconButton>
                                     }
-                                />
+                                /></Link>
                             ))
                     }
                 </List >
