@@ -43,21 +43,21 @@ class DashboardView extends React.Component {
                 <Grid>
                     <Row middle="xs" center='xs'>
                         <Col lg={4}>
-                            <Link to='/ListView'>
+                            <Link to='./List'>
                                 <Button
                                     label={'Go To List'}
                                 />
                             </Link>
                         </Col>
                         <Col lg={4}>
-                            <Link to='/FavouriteTestsListView'>
+                            <Link to='./favourite-tests-list'>
                                 <Button
                                     label={'Go To Favourites'}
                                 />
                             </Link>
                         </Col>
                         <Col lg={4}>
-                            <Link to='/AddTestsView'>
+                            <Link to='/add-tests'>
                                 <Button
                                     label={'Add New Test'}
                                 />
