@@ -23,6 +23,8 @@ class FavouriteTestsListView extends React.Component {
     state = {
         tests: []
     }
+
+    
     removeFromFavouriteListHandler = (test) => {
         fetch(
             `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
