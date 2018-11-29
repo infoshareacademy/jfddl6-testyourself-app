@@ -62,7 +62,7 @@ class FavouriteTestsListView extends React.Component {
                             .map(test => (
                                 <ListItem
                                     key={test.id}
-                                    onClick={()=>{}}/////addddddddddddddddddddddddddddddd
+                                    onClick={()=>{}}//redirection to detailed information
                                     primaryText={test.description}
                                     leftAvatar={<Avatar src={test.img || placeholder} />}
                                     rightIconButton={
