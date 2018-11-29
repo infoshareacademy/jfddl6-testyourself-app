@@ -1,10 +1,16 @@
 import React from 'react';
 
 
-const TestView = (props) => (
-    <div>
-        TestView
-    </div>
-)
+class TestView extends React.Component {
+
+    render() {
+
+        return (
+            <div>
+                TestView
+            </div>
+        )
+    }
+}
 
 export default TestView
