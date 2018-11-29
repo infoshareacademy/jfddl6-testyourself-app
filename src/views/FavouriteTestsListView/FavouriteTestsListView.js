@@ -54,7 +54,7 @@ class FavouriteTestsListView extends React.Component {
             >
                 <List>
                     < Subheader > Favourite Tests</Subheader>
-                    {
+                    {   
                         this.state.tests &&
                         this.state.tests.map &&
                         this.state.tests
