@@ -43,7 +43,7 @@ const MyList = (props) => (
                         props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
-                        //podmienic linka do detailed test info karola
+                        //podmienic linka do detailed test info karola !!!!!!!!
                         <Link to='/dashboard'>
                             <ListItem
                                 key={test.id}
