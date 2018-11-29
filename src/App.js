@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import AddFavouriteView from './views/AddFavouriteView/AddFavouriteView'
 import AddTestsView from './views/AddTestsView/AddTestsView'
@@ -10,7 +10,7 @@ import FavouriteTestsListView from './views/FavouriteTestsListView/FavouriteTest
 import ListView from './views/ListView/ListView'
 import Navigation from './Navigation/Navigation'
 import MenuItem from './Navigation/MenuItem'
-import DashboardView from './views/DashboardView/DashboardView';
+import DashboardView from './views/DashboardView/DashboardView'
 
 class App extends Component {
   render() {
@@ -18,7 +18,8 @@ class App extends Component {
       <MuiThemeProvider>
         <Router>
           <div>
-            <Navigation title="testYourself-App!">
+            <Navigation
+            title="#testYourself-App">
               <MenuItem
                 to="/dashboard"
                 text="Home"
@@ -31,10 +32,10 @@ class App extends Component {
                 to="/favourite-tests-list"
                 text="Favourite tests list"
               />
-                <MenuItem
-                  to="/add-tests"
-                  text="Add tests"
-                />
+              <MenuItem
+                to="/add-tests"
+                text="Add tests"
+              />
               <MenuItem
                 to="/available-tests"
                 text="Available tests"
@@ -44,6 +45,7 @@ class App extends Component {
                 text="Add favourite"
               />
             </Navigation>
+            <Route path="/" exact component={DashboardView} />
             <Route path="/dashboard" component={DashboardView} />
             <Route path="/list" component={ListView} />
             <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
@@ -53,7 +55,7 @@ class App extends Component {
           </div>
         </Router>
       </MuiThemeProvider>
-    );
+    )
   }
 }
 
