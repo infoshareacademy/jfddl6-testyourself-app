@@ -48,6 +48,17 @@ class AddTestView extends React.Component {
     difficultyChange = (event) => this.setState({ difficulty: event.target.value })
     typeChange = (event) => this.setState({ type: event.target.value })
 
+    handleClick = (event) => {
+        this.props.toggleStatement('Something went wrong. Please try again!')
+        if (this.state.name !== '') {
+          this.props.toggleStatement('Product was added successfully!')
+          let product = this.state
+          fetch('https://test-yourself-95f1a.firebaseio.com/', {
+          })
+        }
+        this.reset()
+      }
+    
 
     render() {
         return (
