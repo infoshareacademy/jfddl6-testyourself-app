@@ -9,7 +9,7 @@ import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 import { unifyString } from './utils'
-
+import Link from 'material-ui/Link'
 const style = {
     margin: 20,
     padding: 20
@@ -42,6 +42,8 @@ const MyList = (props) => (
                         props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
+                       //podmienic linka do detailed test info karola !!!!!!!!
+                       <Link to='/dashboard'>
                         <ListItem
                             key={test.id}
                             primaryText={test.description}
@@ -56,6 +58,7 @@ const MyList = (props) => (
                                 </IconButton>
                             }
                         />
+                        </Link>
                     ))
             }
         </List >
