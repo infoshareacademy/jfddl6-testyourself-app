@@ -30,7 +30,7 @@ class App extends Component {
               />
               <MenuItem
                 to="/favourite-tests-list"
-                text="Favourite tests list"
+                text="Favourite tests"
               />
               <MenuItem
                 to="/add-tests"
