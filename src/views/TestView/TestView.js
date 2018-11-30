@@ -1,12 +1,12 @@
 import React from 'react';
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
-
+// import {database} from '../../firebase'
 const style = {
     paper: {
         margin: 20,
         padding: 20,
-        heigth: "100%"
+        height: "100%"
     },
     button: {
         position: 'fixed',
@@ -16,59 +16,45 @@ const style = {
     }
 }
 
-const TestView = (props) => (
-   
+class TestView extends React.Component {
+    constructor(props) {
+        super()
+        this.state.id = props.match.params.id
+        this.state.test = {}
 
-    <Paper
-        style={style.paper}
-    >
-    {
-        <div>
-
-
-    {
-        
-        console.log(props.location.pathname)
-        
-        
-        /* toggleFavorite = (this.test) => {
-        fetch(
-            `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
-            {
-                method: 'PATCH',
-                body: JSON.stringify({ favorite: !test.favorite })
-            }
-        ).then(() => { this.loadData() })
     }
     
+   
 
-      loadData = () => {
-        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data) {
-                    this.setState({ tests: [] })
-                    return
-                }
-                const allTestsArray = Object.entries(data)
-                const testList = allTestsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy 
-                    return values
-                })
-                this.setState({ tests: testList })
-            })
-    } */}
+    componentDidMount() {
+      database.ref(`/tests/${this.state.id}`).on(
+            'value',
+            snapshot=>
+        )
+   }
 
+    onClickHandler = () => {
 
-      <RaisedButton
-            label={"Add to favourite"}
-            primary={true}
-            style={style.button}
-            fullWidth={true}
-            onClick={()=>{}}
-        />  </div>
-        }
-    </Paper>
-)
+    }
+
+    render() { 
+        
+        return (
+       
+        <Paper
+            style={style.paper}
+        >
+            <RaisedButton
+                label={"Add to favourite"}
+                primary={true}
+                style={style.button}
+                fullWidth={true}
+                onClick={() => this.onClickHandler}
+            />
+        </Paper>)
+    }
+}
+// console.log(props.match.params.id)
+
 
 export default TestView
