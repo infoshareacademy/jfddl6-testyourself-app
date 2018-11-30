@@ -11,7 +11,7 @@ import ListView from './views/ListView/ListView'
 import Navigation from './Navigation/Navigation'
 import MenuItem from './Navigation/MenuItem'
 import DashboardView from './views/DashboardView/DashboardView'
-
+import TestView from './views/TestView/TestView'
 class App extends Component {
   render() {
     return (
@@ -30,7 +30,7 @@ class App extends Component {
               />
               <MenuItem
                 to="/favourite-tests-list"
-                text="Favourite tests list"
+                text="Favourite tests"
               />
               <MenuItem
                 to="/add-tests"
@@ -45,12 +45,14 @@ class App extends Component {
                 text="Add favourite"
               />
             </Navigation>
+            <Route path="/" exact component={DashboardView} />
             <Route path="/dashboard" component={DashboardView} />
             <Route path="/list" component={ListView} />
             <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
             <Route path="/add-tests" component={AddTestsView} />
             <Route path="/available-tests" component={AvailableTestsView} />
             <Route path="/add-favourite" component={AddFavouriteView} />
+            <Route path="/test-view/:id" component={TestView}/>
           </div>
         </Router>
       </MuiThemeProvider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
-// import { database } from '../../firebase'
+
 
 import MyList from './MyList'
 
@@ -20,7 +20,7 @@ class ListView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
-    onClickListItemHandler = () => { }//adddddddddddddddd
+    onClickListItemHandler = () => { }
 
     onFavoriteChangeHandler = (test) => {
         fetch(
@@ -30,6 +30,9 @@ class ListView extends React.Component {
                 body: JSON.stringify({ favorite: !test.favorite })
             }
         ).then(() => { this.loadData() })
+    }
+    onClickListItemHandler = (test) => {
+        this.props.history.push(`/test-view/${test.id}`)
     }
 
     loadData = () => {
@@ -41,13 +44,11 @@ class ListView extends React.Component {
                     return
                 }
                 const testsArray = Object.entries(data)
-                // console.log('testArray', testsArray)
                 const testList = testsArray.map(([id, values]) => {
                     values.id = id //nowa wlasciwosc id w obiekcie testy
                     return values
                 })
                 this.setState({ tests: testList })
-                // console.log('testList', testList)
             })
     }
 

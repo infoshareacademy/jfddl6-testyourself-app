@@ -8,14 +8,23 @@ import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 
+
 const style = {
-    margin: 20,
-    padding: 20
+    paper: {
+        margin: 20,
+        padding: 20
+    },
+    link: {
+        textDecoration: "none"
+    }
+
 }
 class FavouriteTestsListView extends React.Component {
     state = {
         tests: []
     }
+
+    
     removeFromFavouriteListHandler = (test) => {
         fetch(
             `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
@@ -42,6 +51,9 @@ class FavouriteTestsListView extends React.Component {
                 this.setState({ tests: testList })
             })
     }
+    onClickListItemHandler = (test) => {
+        this.props.history.push(`/test-view/${test.id}`)
+    }
 
     componentWillMount() {
         this.loadData()
@@ -50,7 +62,7 @@ class FavouriteTestsListView extends React.Component {
     render() {
         return (
             <Paper
-                style={style}
+                style={style.paper}
             >
                 <List>
                     < Subheader > Favourite Tests</Subheader>
@@ -62,11 +74,11 @@ class FavouriteTestsListView extends React.Component {
                             .map(test => (
                                 <ListItem
                                     key={test.id}
-                                    onClick={()=>{}}/////addddddddddddddddddddddddddddddd
+                                    onClick={() => this.onClickListItemHandler(test)}
                                     primaryText={test.description}
                                     leftAvatar={<Avatar src={test.img || placeholder} />}
                                     rightIconButton={
-                                        <IconButton>
+                                        <IconButton >
                                             <FavoriteIconChecked onClick={() => this.removeFromFavouriteListHandler(test)} />
                                         </IconButton>
                                     }
