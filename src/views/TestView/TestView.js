@@ -3,6 +3,9 @@ import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { database } from '../../firebase'
+import mapObjectToArray from './../utils/mapObjectToArray'
+
+const dbRef = database.ref('/tests')
 
 const style = {
     paper: {
@@ -20,9 +23,23 @@ const style = {
 
 class TestView extends React.Component {
 
-    constructor() {
-        super()
+    // constructor() {
+    //     super()
 
+    // }
+
+    componentDidMount() {
+        dbRef.on(
+            'value',
+            snapshot => this.setState({
+                messages: mapObjectToArray(snapshot.val()).reverse(),
+                newMessageText: ''
+            })
+        )
+    }
+
+    componentWillUnmount() {
+        dbRef.off()
     }
 
     render() {

@@ -20,8 +20,6 @@ class ListView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
-    onClickListItemHandler = () => { }
-
     onFavoriteChangeHandler = (test) => {
         fetch(
             `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
@@ -31,6 +29,7 @@ class ListView extends React.Component {
             }
         ).then(() => { this.loadData() })
     }
+
     onClickListItemHandler = (test) => {
         this.props.history.push(`/test-view/${test.id}`)
     }
