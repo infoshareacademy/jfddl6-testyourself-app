@@ -18,6 +18,13 @@ const style = {
     },
     image:{
         width:'70vw',
+        maxWidth:'500px'
+    },
+    textName:{
+
+    },
+    text:{
+
     }
 }
 
@@ -77,11 +84,11 @@ class TestView extends React.Component {
                 style={style.image}
                 alt=''
                 />
-                <h1>{`Test name: ${this.state.test.description}`}</h1>
-                <h2>{`Category: ${this.state.test.category}`}</h2>
-                <h2>{`Number of questions: ${this.state.numOfQuestions}`}</h2>
-                <h2>{`Difficulty: `}</h2>
-                <h3>{`Description: `}</h3>
+                <h1 style={style.textName}>{`#Test name: ${this.state.test.description}`}</h1>
+                <h3 style={style.text}>{`Category: ${this.state.test.category}`}</h3>
+                <h3 style={style.text}>{`Number of questions: ${this.state.numOfQuestions}`}</h3>
+                {/* <h3 style={style.text}>{`Difficulty: `}</h3> */}
+                <h3 style={style.text}>{`Description: `}</h3>
 
                 <RaisedButton
                     label={"Add to favourite"}
