@@ -1,7 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
-// import {database} from '../../firebase'
+import {database} from '../../firebase'
 const style = {
     paper: {
         margin: 20,
