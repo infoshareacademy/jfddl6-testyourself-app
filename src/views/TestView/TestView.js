@@ -23,19 +23,30 @@ const style = {
 
 class TestView extends React.Component {
 
-    // constructor() {
-    //     super()
-
-    // }
+    state = {
+        testObject: null
+    }
 
     componentDidMount() {
-        dbRef.on(
+        dbRef.once(
             'value',
-            snapshot => this.setState({
-                messages: mapObjectToArray(snapshot.val()).reverse(),
-                newMessageText: ''
+            snapshot => {
+
+                const arrayOfTest = mapObjectToArray(snapshot.val())
+                arrayOfTest.forEach(test => {
+                    for (let key in test) {
+                        if (test.hasOwnProperty(key) && test.key === this.props.match.params.id) {
+                            const tempTest = Object.create(test)
+                            this.setState({ testObject: tempTest })
+
+                        }
+                    }
+
+                });
+
             })
-        )
+        console.log(this.state.testObject)
+
     }
 
     componentWillUnmount() {
@@ -43,7 +54,7 @@ class TestView extends React.Component {
     }
 
     render() {
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         return (
             < Paper
                 style={style.paper}
