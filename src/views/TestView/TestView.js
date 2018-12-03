@@ -2,8 +2,6 @@ import React from 'react';
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { database } from '../../firebase'
-// import mapObjectToArray from './../utils/mapObjectToArray'
-
 
 const style = {
     paper: {
@@ -48,12 +46,9 @@ class TestView extends React.Component {
         database.ref(`/tests/${this.state.id}`).once(
             'value',
             snapshot => {
-                // console.log('favorite from db', snapshot.val().favorite)
                 this.setState({ test: snapshot.val() })
-                // console.log('test state from snap', this.state.test)
                 this.setState({ testArray: Object.values(this.state.test) })
                 this.setState({ numOfQuestions: Object.values(this.state.testArray[4]).length })
-                // console.log('maped snap', mapObjectToArray(snapshot.val()))
                 return this.setState({ favorite: snapshot.val().favorite })
             }
 
@@ -64,14 +59,19 @@ class TestView extends React.Component {
         database.ref(`/tests/${this.state.id}`).off()
     }
 
-   
-
     onClickHandler = () => {
         if (this.state.favorite === false) {
             this.setState({ favorite: true })
+            database.ref(`/tests/${this.state.id}/favorite`).set(
+                true
+            )
         }
-        else
+        else {
             this.setState({ favorite: false })
+            database.ref(`/tests/${this.state.id}/favorite`).set(
+                false
+            )
+        }
     }
 
     render() {
@@ -102,7 +102,7 @@ class TestView extends React.Component {
                     fullWidth={true}
                     onClick={this.onClickHandler}
                 />
-                
+
             </Paper>)
     }
 }
