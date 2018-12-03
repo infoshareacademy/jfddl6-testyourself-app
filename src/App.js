@@ -13,36 +13,52 @@ import MenuItem from './Navigation/MenuItem'
 import DashboardView from './views/DashboardView/DashboardView'
 import TestView from './views/TestView/TestView'
 
-
 class App extends Component {
+
+  state = {
+    isDrawerOpen: false
+  }
+
+  toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
+
+  handleClose = () => this.setState({ isDrawerOpen: false });
+
   render() {
     return (
       <MuiThemeProvider>
         <Router>
           <div>
             <Navigation
+              toggleDrawer={this.toggleDrawer}
+              isDrawerOpen={this.state.isDrawerOpen}
               title="#testYourself-App">
               <MenuItem
+                handleClose={this.handleClose}
                 to="/dashboard"
                 text="Home"
               />
               <MenuItem
+                handleClose={this.handleClose}
                 to="/list"
                 text="List"
               />
               <MenuItem
+                handleClose={this.handleClose}
                 to="/favourite-tests-list"
                 text="Favourite tests"
               />
               <MenuItem
+                handleClose={this.handleClose}
                 to="/add-tests"
                 text="Add tests"
               />
               <MenuItem
+                handleClose={this.handleClose}
                 to="/available-tests"
                 text="Available tests"
               />
               <MenuItem
+                handleClose={this.handleClose}
                 to="/add-favourite"
                 text="Add favourite"
               />
