@@ -52,7 +52,7 @@ class App extends Component {
                 to="/add-tests"
                 text="Add tests"
               />
-              <MenuItem
+              {/* <MenuItem
                 handleClose={this.handleClose}
                 to="/available-tests"
                 text="Available tests"
@@ -61,7 +61,7 @@ class App extends Component {
                 handleClose={this.handleClose}
                 to="/add-favourite"
                 text="Add favourite"
-              />
+              /> */}
             </Navigation>
             <Route path="/" exact component={DashboardView} />
             <Route path="/dashboard" component={DashboardView} />
