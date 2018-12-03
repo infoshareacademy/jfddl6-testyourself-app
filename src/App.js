@@ -12,6 +12,8 @@ import Navigation from './Navigation/Navigation'
 import MenuItem from './Navigation/MenuItem'
 import DashboardView from './views/DashboardView/DashboardView'
 import TestView from './views/TestView/TestView'
+
+
 class App extends Component {
   render() {
     return (
@@ -52,7 +54,7 @@ class App extends Component {
             <Route path="/add-tests" component={AddTestsView} />
             <Route path="/available-tests" component={AvailableTestsView} />
             <Route path="/add-favourite" component={AddFavouriteView} />
-            <Route path="/test-view" component={TestView}/>
+            <Route path="/test-view/:id" component={TestView}/>
           </div>
         </Router>
       </MuiThemeProvider>
