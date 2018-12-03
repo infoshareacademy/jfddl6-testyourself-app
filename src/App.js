@@ -12,6 +12,8 @@ import Navigation from './Navigation/Navigation'
 import MenuItem from './Navigation/MenuItem'
 import DashboardView from './views/DashboardView/DashboardView'
 import TestView from './views/TestView/TestView'
+
+
 class App extends Component {
   render() {
     return (
