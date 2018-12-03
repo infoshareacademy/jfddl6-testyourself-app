@@ -5,24 +5,19 @@ import AppBar from './AppBar.js'
 import SideBar from './Sidebar.js'
 
 class Navigation extends React.Component {
-    state = {
-        isDrawerOpen: false
-    }
-
-    toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
 
     render() {
         return (
             <div>
                 <AppBar
                     title={this.props.title}
-                    onLeftIconButtonClick={this.toggleDrawer}
+                    toggleDrawer={this.props.toggleDrawer}
                 />
                 <SideBar
                     docked={false}
                     width={200}
-                    open={this.state.isDrawerOpen}
-                    onRequestChange={this.toggleDrawer}
+                    open={this.props.isDrawerOpen}
+                    onRequestChange={this.props.toggleDrawer}
                 >
                     {this.props.children}
                 </SideBar>

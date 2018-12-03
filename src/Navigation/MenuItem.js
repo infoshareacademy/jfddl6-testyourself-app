@@ -8,7 +8,9 @@ const MenuItem = (props) => (
             textDecoration: 'none'
         }}
         to={props.to}>
-        <MuiMenuItem>
+        <MuiMenuItem
+            onClick={props.handleClose}
+        >
             {props.text}
         </MuiMenuItem>
     </Link>
