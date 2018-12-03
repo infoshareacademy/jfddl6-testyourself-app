@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { database } from '../../firebase'
@@ -7,7 +7,8 @@ const style = {
     paper: {
         margin: 20,
         padding: 20,
-        height: "100%"
+        height: "100%",
+        textAlign: 'center'
     },
     button: {
         position: 'fixed',
@@ -31,8 +32,6 @@ class TestView extends React.Component {
     constructor(props) {
         super()
         this.state.id = props.match.params.id
-        // console.log(props.match.params.id)
-
     }
     state = {
         id: '',
@@ -80,16 +79,18 @@ class TestView extends React.Component {
             <Paper
                 style={style.paper}
             >
-                <img
-                    src={this.state.test.img}
-                    style={style.image}
-                    alt=''
-                />
+
                 <h1 style={style.textName}>{`#Test name: ${this.state.test.description}`}</h1>
                 <h3 style={style.text}>{`Category: ${this.state.test.category}`}</h3>
                 <h3 style={style.text}>{`Number of questions: ${this.state.numOfQuestions}`}</h3>
                 {/* <h3 style={style.text}>{`Difficulty: `}</h3> */}
                 {/* <h3 style={style.text}>{`Description: `}</h3> */}
+
+                <img
+                    src={this.state.test.img}
+                    style={style.image}
+                    alt=''
+                />
 
                 <RaisedButton
 

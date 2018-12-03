@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
-// import { database } from '../../firebase'
+
 
 import MyList from './MyList'
 
@@ -19,8 +19,6 @@ class ListView extends React.Component {
     onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
-    
-    
 
     onFavoriteChangeHandler = (test) => {
         fetch(
@@ -31,7 +29,8 @@ class ListView extends React.Component {
             }
         ).then(() => { this.loadData() })
     }
-    onClickListItemHandler=(test)=>{
+
+    onClickListItemHandler = (test) => {
         this.props.history.push(`/test-view/${test.id}`)
     }
 
@@ -45,7 +44,7 @@ class ListView extends React.Component {
                 }
                 const testsArray = Object.entries(data)
                 const testList = testsArray.map(([id, values]) => {
-                    values.id = id 
+                    values.id = id //nowa wlasciwosc id w obiekcie testy
                     return values
                 })
                 this.setState({ tests: testList })
