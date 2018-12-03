@@ -5,6 +5,10 @@ import SelectField from "material-ui/SelectField"
 import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
+import { List, ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+
+// import MyList from '../ListView/MyList';
 
 
 
@@ -26,27 +30,65 @@ const style = {
     }
 }
 
-const initialState = {
-    value: "",
-    category: "",
-    difficulty: "",
-    type: "",
-    question: "",
-    answer: ""
+// const initialState = {
+//     value: "",
+//     category: "",
+//     difficulty: "",
+//     type: "",
+//     question: "",
+//     answer: "",
+//     questions: []
 
-}
+// }
 
 class AddTestView extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = initialState
-    }
-    reset() {
-        this.setState(initialState)
-      }
+        this.state =
+            {
+                value: "",
+                category: "",
+                difficulty: "",
+                type: "",
+                question: "",
+                answer: "",
+                questions: []
 
-    categoryChange = (event) => this.setState({ category: event.target.value })
+            }
+
+
+    }
+
+    loadData = () => {
+        fetch(`https://test-yourself-95f1a.firebaseio.com/questions.json`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data) {
+                    this.setState({ questions: [] })
+                    return
+                }
+                const questionsArray = Object.entries(data)
+                const questionsList = questionsArray.map(([id, values]) => {
+                    values.id = id //nowa wlasciwosc id w obiekcie testy
+                    return values
+                })
+                this.setState({ questions: questionsList })
+            })
+    }
+    componentDidMount() {
+        this.loadData()
+    }
+
+
+    // reset() {
+    //     this.setState(initialState)
+    // }
+    onClickSaveHandler = () => {
+
+    }
+
+    categoryChange = (event) => this.setState({ category: event.target.value})
 
     difficultyChange = (event) => this.setState({ difficulty: event.target.value })
 
@@ -55,10 +97,10 @@ class AddTestView extends React.Component {
     getFromFirebase = () => {
         let product = this.state
         fetch('https://test-yourself-95f1a.firebaseio.com/', {
-          method: 'GET',
-          body: JSON.stringify(product)
+            method: 'GET',
+            body: JSON.stringify(product)
         })
-      }
+    }
 
     handleClick = (event) => {
         this.props.toggleStatement('Something went wrong. Please try again!')
@@ -102,6 +144,7 @@ class AddTestView extends React.Component {
                                             value={category}
                                             primaryText={category}
                                             styles={style.button}
+
                                         />
                                     ))}
                                 </SelectField>
@@ -187,13 +230,38 @@ class AddTestView extends React.Component {
                             />
                         </Row>
                         <Row center="sm">
+                            <Col lg={8}
+                            />
+                            <List>
+
+                                < Subheader > Available Questions</Subheader>
+                                {
+                                    this.state.questions &&
+                                    this.state.questions.map &&
+                                    this.state.questions
+                                        .map(question => (
+                                            <ListItem
+                                                key={question.id}
+                                                primaryText={question.question}
+                                            // onClick={() => props.onClickListItemHandler(question)}
+
+                                            />
+                                        ))
+                                }
+                            </List >
+
+
+                        </Row>
+                        <Row center="sm">
                             <RaisedButton
                                 label="Save"
                                 primary={true}
                                 fullWidth={true}
                                 style={style.button}
+                                onClick={this.onClickSaveHandler}
                             />
                         </Row>
+
                     </div>
                 </Grid>
             </Paper>
