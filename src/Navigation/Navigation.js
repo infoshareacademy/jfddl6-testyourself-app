@@ -11,6 +11,8 @@ class Navigation extends React.Component {
 
     toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
 
+    handleClose = () => this.setState({ open: false });
+
     render() {
         return (
             <div>

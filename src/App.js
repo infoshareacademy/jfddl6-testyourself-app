@@ -21,7 +21,7 @@ class App extends Component {
         <Router>
           <div>
             <Navigation
-            title="#testYourself-App">
+              title="#testYourself-App">
               <MenuItem
                 to="/dashboard"
                 text="Home"
@@ -54,7 +54,7 @@ class App extends Component {
             <Route path="/add-tests" component={AddTestsView} />
             <Route path="/available-tests" component={AvailableTestsView} />
             <Route path="/add-favourite" component={AddFavouriteView} />
-            <Route path="/test-view/:id" component={TestView}/>
+            <Route path="/test-view/:id" component={TestView} />
           </div>
         </Router>
       </MuiThemeProvider>
