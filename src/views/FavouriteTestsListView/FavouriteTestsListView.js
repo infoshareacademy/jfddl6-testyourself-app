@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
-import { Link } from 'react-router-dom'
+
 
 const style = {
     paper: {
@@ -23,6 +23,8 @@ class FavouriteTestsListView extends React.Component {
     state = {
         tests: []
     }
+
+    
     removeFromFavouriteListHandler = (test) => {
         fetch(
             `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
@@ -49,6 +51,9 @@ class FavouriteTestsListView extends React.Component {
                 this.setState({ tests: testList })
             })
     }
+    onClickListItemHandler = (test) => {
+        this.props.history.push(`/test-view/${test.id}`)
+    }
 
     componentWillMount() {
         this.loadData()
@@ -61,26 +66,23 @@ class FavouriteTestsListView extends React.Component {
             >
                 <List>
                     < Subheader > Favourite Tests</Subheader>
-                    {   
+                    {
                         this.state.tests &&
                         this.state.tests.map &&
                         this.state.tests
                             .filter((test) => (test.favorite === true))
                             .map(test => (
-
-                                //podmienic linka do detailed test info karola !!!!!!!!!!!
-                                <Link to='/dashboard' style={style.link}>
                                 <ListItem
                                     key={test.id}
-                                    
+                                    onClick={() => this.onClickListItemHandler(test)}
                                     primaryText={test.description}
                                     leftAvatar={<Avatar src={test.img || placeholder} />}
                                     rightIconButton={
-                                        <IconButton>
+                                        <IconButton >
                                             <FavoriteIconChecked onClick={() => this.removeFromFavouriteListHandler(test)} />
                                         </IconButton>
                                     }
-                                /></Link>
+                                />
                             ))
                     }
                 </List >
