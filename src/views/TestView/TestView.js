@@ -45,12 +45,9 @@ class TestView extends React.Component {
         database.ref(`/tests/${this.state.id}`).once(
             'value',
             snapshot => {
-                // console.log('favorite from db', snapshot.val().favorite)
                 this.setState({ test: snapshot.val() })
-                // console.log('test state from snap', this.state.test)
                 this.setState({ testArray: Object.values(this.state.test) })
                 this.setState({ numOfQuestions: Object.values(this.state.testArray[4]).length })
-                // console.log('maped snap', mapObjectToArray(snapshot.val()))
                 return this.setState({ favorite: snapshot.val().favorite })
             }
 
