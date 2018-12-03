@@ -61,9 +61,16 @@ class TestView extends React.Component {
     onClickHandler = () => {
         if (this.state.favorite === false) {
             this.setState({ favorite: true })
+            database.ref(`/tests/${this.state.id}/favorite`).set(
+                true
+            )
         }
-        else
+        else {
             this.setState({ favorite: false })
+            database.ref(`/tests/${this.state.id}/favorite`).set(
+                false
+            )
+        }
     }
 
     render() {
