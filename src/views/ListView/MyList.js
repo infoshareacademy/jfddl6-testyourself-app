@@ -10,20 +10,22 @@ import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 import { unifyString } from './utils'
 
-const style = {
-    margin: 20,
-    padding: 20
-}
 
+const style = {
+    paper: {
+        margin: 20,
+        padding: 20
+    }
+
+}
 
 const MyList = (props) => (
 
-
     <Paper
-        style={style}
+        style={style.paper}
     >
         <List>
-           
+
             < Subheader > Available Tests</Subheader>
             {
                 props.tests &&
@@ -42,20 +44,21 @@ const MyList = (props) => (
                         props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
-                        <ListItem
-                            key={test.id}
-                            primaryText={test.description}
-                            leftAvatar={<Avatar src={test.img || placeholder} />}
-                            rightIconButton={
-                                <IconButton>
-                                    {test.favorite ?
-                                        <FavoriteIconChecked onClick={() =>  props.toggleFavorite(test) } />
-                                        :
-                                        <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
-                                    }
-                                </IconButton>
-                            }
-                        />
+                            <ListItem
+                                key={test.id}
+                                primaryText={test.description}
+                                leftAvatar={<Avatar src={test.img || placeholder} />}
+                                onClick={()=>props.onClickListItemHandler(test)}
+                                rightIconButton={
+                                    <IconButton>
+                                        {test.favorite ?
+                                            <FavoriteIconChecked onClick={() => props.toggleFavorite(test)} />
+                                            :
+                                            <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
+                                        }
+                                    </IconButton>
+                                }
+                            />
                     ))
             }
         </List >

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchView from './SearchView/SearchView'
-// import { database } from '../../firebase'
+
 
 import MyList from './MyList'
 
@@ -30,6 +30,10 @@ class ListView extends React.Component {
         ).then(() => { this.loadData() })
     }
 
+    onClickListItemHandler = (test) => {
+        this.props.history.push(`/test-view/${test.id}`)
+    }
+
     loadData = () => {
         fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
             .then(response => response.json())
@@ -39,13 +43,11 @@ class ListView extends React.Component {
                     return
                 }
                 const testsArray = Object.entries(data)
-                // console.log('testArray', testsArray)
                 const testList = testsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy 
+                    values.id = id //nowa wlasciwosc id w obiekcie testy
                     return values
                 })
                 this.setState({ tests: testList })
-                // console.log('testList', testList)
             })
     }
 
@@ -72,7 +74,7 @@ class ListView extends React.Component {
                 <MyList
                     searchText={this.state.searchText}
                     tests={this.state.tests}
-                    
+                    onClickListItemHandler={this.onClickListItemHandler}
                     toggleFavorite={this.onFavoriteChangeHandler}
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
                     categoryFilters={this.state.categoryFilters}
