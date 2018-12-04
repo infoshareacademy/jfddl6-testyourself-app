@@ -7,14 +7,15 @@ import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-
+import { unifyString } from '../ListView/utils'
+import Checkbox from 'material-ui/Checkbox';
 // import MyList from '../ListView/MyList';
 
 
 
 //const headlines = ["Category", "Difficulty", "Type", "Question", "Correct Answer", "Incorrect Answer"]
-const category = ["Science Computers", "Animals", "Geography", "Mythology",]
-const difficulty = ["easy", "medium", "hard"]
+//const category = ["Science Computers", "Animals", "Geography", "Mythology",]
+//const difficulty = ["easy", "medium", "hard"]
 const type = ["multiple", "open"]
 
 const style = {
@@ -45,19 +46,25 @@ class AddTestView extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state =
-            {
-                value: "",
+
+        this.state = {
+            value: "",
+            category: "",
+            difficulty: "",
+            type: "",
+            question: "",
+            answer: "",
+            questions: [],
+            chosenCategoryFilter: 0,
+            categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
+            createdTest: {
                 category: "",
-                difficulty: "",
-                type: "",
-                question: "",
-                answer: "",
-                questions: []
-
+                description: "",
+                favorite: false,
+                img: "",
+                questions: {}
             }
-
-
+        }
     }
 
     loadData = () => {
@@ -88,7 +95,18 @@ class AddTestView extends React.Component {
 
     }
 
-    categoryChange = (event) => this.setState({ category: event.target.value})
+    onSearchSelectFieldValueChangeHandler = (event, index, value) => {
+        this.setState({
+            chosenCategoryFilter: parseInt(value, 10) - 1,
+            createdTest: {
+                ...this.state.createdTest,
+                category: this.state.categoryFilters[this.state.chosenCategoryFilter + 1]
+            }
+        })
+
+    }
+
+    categoryChange = (event) => this.setState({ category: event.target.value })
 
     difficultyChange = (event) => this.setState({ difficulty: event.target.value })
 
@@ -100,6 +118,12 @@ class AddTestView extends React.Component {
             method: 'GET',
             body: JSON.stringify(product)
         })
+    }
+    onTextInputChangeHandler = (event) => {
+        this.setState({ 
+            createdTest: { 
+                ...this.state.createdTest,
+                description: event.target.value } })
     }
 
     handleClick = (event) => {
@@ -129,28 +153,36 @@ class AddTestView extends React.Component {
                     <div>
 
                         <Row center="sm">
-                            <Col lg={8}>
-                                <SelectField
-                                    multiple={true}
-                                    hintText="Category"
-                                    value={this.state.value}
-                                    onChange={this.categoryChange}
-                                    fullWidth={true}
-                                >
-                                    {category.map(category => (
-                                        <MenuItem
-                                            key={category}
-                                            insetChildren={true}
-                                            value={category}
-                                            primaryText={category}
-                                            styles={style.button}
-
-                                        />
-                                    ))}
-                                </SelectField>
-                            </Col>
+                            <Col lg={8}
+                            />
+                            {/*nazwa testu */}
+                            <TextField
+                                floatingLabelText="Name Your Test"
+                                fullWidth={true}
+                                onChange={this.onTextInputChangeHandler}
+                            />
                         </Row>
                         <Row center="sm">
+                            <Col lg={8}>
+                                <SelectField
+                                    floatingLabelText="Categories"
+                                    value={this.state.chosenCategoryFilter + 1}
+                                    onChange={this.onSearchSelectFieldValueChangeHandler}
+                                >
+                                    {/* {console.log(this.state.chosenCategoryFilter + 1)} */}
+                                    {this.state.categoryFilters.map((filter, index) => (
+                                        <MenuItem
+                                            key={index}
+                                            value={index + 1}
+                                            primaryText={filter}
+                                        />
+                                    ))}
+
+                                </SelectField>
+
+                            </Col>
+                        </Row>
+                        {/* <Row center="sm">
                             <Col lg={8}>
                                 <SelectField
                                     multiple={true}
@@ -170,7 +202,7 @@ class AddTestView extends React.Component {
                                     ))}
                                 </SelectField>
                             </Col>
-                        </Row>
+                        </Row> */}
                         <Row center="sm">
                             <Col lg={8}>
                                 <SelectField
@@ -195,43 +227,6 @@ class AddTestView extends React.Component {
                         <Row center="sm">
                             <Col lg={8}
                             />
-                            <TextField
-                                hintText="Question"
-                                fullWidth={true}
-                            />
-                        </Row>
-                        <Row center="sm">
-                            <Col lg={8} />
-                            <TextField
-                                hintText="Correct Answer"
-                                fullWidth={true}
-                            />
-                        </Row>
-                        <Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Incorrect Answer"
-                                fullWidth={true}
-                            />
-                        </Row><Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Incorrect Answer"
-                                fullWidth={true}
-                            />
-                        </Row><Row center="sm">
-                            <Col lg={8}
-                            />
-                            <TextField
-                                hintText="Incorrect Answer"
-                                fullWidth={true}
-                            />
-                        </Row>
-                        <Row center="sm">
-                            <Col lg={8}
-                            />
                             <List>
 
                                 < Subheader > Available Questions</Subheader>
@@ -239,11 +234,17 @@ class AddTestView extends React.Component {
                                     this.state.questions &&
                                     this.state.questions.map &&
                                     this.state.questions
+                                        .filter((question) => (
+                                            (this.state.chosenCategoryFilter === 0) ?
+                                                true :
+                                                unifyString(question.category) === unifyString(this.state.categoryFilters[this.state.chosenCategoryFilter])
+                                        ))
                                         .map(question => (
                                             <ListItem
                                                 key={question.id}
                                                 primaryText={question.question}
-                                            // onClick={() => props.onClickListItemHandler(question)}
+                                                leftCheckbox={<Checkbox />}
+                                            //onClick={() => props.onClickListItemHandler(question)}
 
                                             />
                                         ))
