@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import Auth from './Auth/Auth'
+
 import AddFavouriteView from './views/AddFavouriteView/AddFavouriteView'
 import AddTestsView from './views/AddTestsView/AddTestsView'
 import AvailableTestsView from './views/AvailableTestsView/AvailableTestsView'
@@ -26,53 +28,56 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <Router>
-          <div>
-            <Navigation
-              toggleDrawer={this.toggleDrawer}
-              isDrawerOpen={this.state.isDrawerOpen}
-              title="#testYourself-App">
-              <MenuItem
-                handleClose={this.handleClose}
-                to="/dashboard"
-                text="Home"
-              />
-              <MenuItem
-                handleClose={this.handleClose}
-                to="/list"
-                text="List"
-              />
-              <MenuItem
-                handleClose={this.handleClose}
-                to="/favourite-tests-list"
-                text="Favourite tests"
-              />
-              <MenuItem
-                handleClose={this.handleClose}
-                to="/add-tests"
-                text="Add tests"
-              />
-              {/* <MenuItem
+        <Auth>
+
+          <Router>
+            <div>
+              <Navigation
+                toggleDrawer={this.toggleDrawer}
+                isDrawerOpen={this.state.isDrawerOpen}
+                title="#testYourself-App">
+                <MenuItem
+                  handleClose={this.handleClose}
+                  to="/dashboard"
+                  text="Home"
+                />
+                <MenuItem
+                  handleClose={this.handleClose}
+                  to="/list"
+                  text="List"
+                />
+                <MenuItem
+                  handleClose={this.handleClose}
+                  to="/favourite-tests-list"
+                  text="Favourite tests"
+                />
+                <MenuItem
+                  handleClose={this.handleClose}
+                  to="/add-tests"
+                  text="Add tests"
+                />
+                {/* <MenuItem
                 handleClose={this.handleClose}
                 to="/available-tests"
                 text="Available tests"
-              />
-              <MenuItem
+                />
+                <MenuItem
                 handleClose={this.handleClose}
                 to="/add-favourite"
                 text="Add favourite"
               /> */}
-            </Navigation>
-            <Route path="/" exact component={DashboardView} />
-            <Route path="/dashboard" component={DashboardView} />
-            <Route path="/list" component={ListView} />
-            <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
-            <Route path="/add-tests" component={AddTestsView} />
-            <Route path="/available-tests" component={AvailableTestsView} />
-            <Route path="/add-favourite" component={AddFavouriteView} />
-            <Route path="/test-view/:id" component={TestView} />
-          </div>
-        </Router>
+              </Navigation>
+              <Route path="/" exact component={DashboardView} />
+              <Route path="/dashboard" component={DashboardView} />
+              <Route path="/list" component={ListView} />
+              <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
+              <Route path="/add-tests" component={AddTestsView} />
+              <Route path="/available-tests" component={AvailableTestsView} />
+              <Route path="/add-favourite" component={AddFavouriteView} />
+              <Route path="/test-view/:id" component={TestView} />
+            </div>
+          </Router>
+        </Auth>
       </MuiThemeProvider>
     )
   }
