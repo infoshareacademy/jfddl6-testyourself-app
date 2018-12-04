@@ -21,6 +21,22 @@ class DashboardView extends React.Component {
         viewportWidth: window.innerWidth
     }
 
+
+    loadFromFirebase = () => {
+        fetch('https://test-yourself-95f1a.firebaseio.com/tests.json')
+            .then(response => response.json())
+            .then(data => {
+                if (this.state.tests === data) return
+                this.setState({ tests: data })
+                console.log(data)
+            })
+
+    }
+    componentWillMount() {
+        this.loadFromFirebase()
+    }
+
+
     componentDidMount() {
         window.addEventListener(
             'resize',
@@ -94,4 +110,4 @@ class DashboardView extends React.Component {
     }
 }
 
-    export default DashboardView
+export default DashboardView
