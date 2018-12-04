@@ -2,6 +2,7 @@ import React from 'react'
 
 import { auth, googleProvider } from './../firebase'
 
+import FlatButton from 'material-ui/FlatButton'
 import LoginForm from './LoginForm'
 
 class Auth extends React.Component {
@@ -41,7 +42,6 @@ class Auth extends React.Component {
     }
 
     render() {
-        console.log(`${this.state.password} ${this.state.email}`)
         return (
             <div>
                 {
