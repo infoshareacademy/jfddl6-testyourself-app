@@ -16,7 +16,7 @@ import Checkbox from 'material-ui/Checkbox';
 //const headlines = ["Category", "Difficulty", "Type", "Question", "Correct Answer", "Incorrect Answer"]
 //const category = ["Science Computers", "Animals", "Geography", "Mythology",]
 //const difficulty = ["easy", "medium", "hard"]
-const type = ["multiple", "open"]
+//const type = ["multiple", "open"]
 
 const style = {
     paper: {
@@ -120,8 +120,8 @@ class AddTestView extends React.Component {
         })
     }
     onTextInputChangeHandler = (event) => {
-        this.setState({ 
-            createdTest: { 
+        this.setState({
+            createdTest: {
                 ...this.state.createdTest,
                 description: event.target.value } })
     }
@@ -135,7 +135,16 @@ class AddTestView extends React.Component {
         }
         this.reset()
     }
-
+    onCheckBoxSelectionHandler=(id)=>{
+        const newQuestions = {
+            ...this.state.createdTest.questions,
+        };
+        newQuestions[id] = true
+        this.setState({createdTest: {
+            ...this.state.createdTest,
+            questions: newQuestions
+        }})
+    }
 
     render() {
         return (
@@ -182,48 +191,12 @@ class AddTestView extends React.Component {
 
                             </Col>
                         </Row>
-                        {/* <Row center="sm">
-                            <Col lg={8}>
-                                <SelectField
-                                    multiple={true}
-                                    hintText="Difficulty"
-                                    value={this.state.value}
-                                    onChange={this.difficultyChange}
-                                    fullWidth={true}
-                                >
-                                    {difficulty.map(difficulty => (
-                                        <MenuItem
-                                            key={difficulty}
-                                            insetChildren={true}
-                                            value={difficulty}
-                                            primaryText={difficulty}
-                                            styles={style.button}
-                                        />
-                                    ))}
-                                </SelectField>
-                            </Col>
-                        </Row> */}
-                        <Row center="sm">
-                            <Col lg={8}>
-                                <SelectField
-                                    multiple={true}
-                                    hintText="Type"
-                                    value={this.state.value}
-                                    onChange={this.typeChange}
-                                    fullWidth={true}
-                                >
-                                    {type.map(type => (
-                                        <MenuItem
-                                            key={type}
-                                            insetChildren={true}
-                                            value={type}
-                                            primaryText={type}
-                                            styles={style.button}
-                                        />
-                                    ))}
-                                </SelectField>
-                            </Col>
-                        </Row>
+                        <TextField
+                                floatingLabelText="IMAGE"
+                                fullWidth={true}
+                                onChange={this}
+                            />
+                        
                         <Row center="sm">
                             <Col lg={8}
                             />
@@ -243,7 +216,8 @@ class AddTestView extends React.Component {
                                             <ListItem
                                                 key={question.id}
                                                 primaryText={question.question}
-                                                leftCheckbox={<Checkbox />}
+                                                leftCheckbox={<Checkbox
+                                                    onClick={()=>this.onCheckBoxSelectionHandler(question.id)} />}
                                             //onClick={() => props.onClickListItemHandler(question)}
 
                                             />
