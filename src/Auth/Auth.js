@@ -9,15 +9,21 @@ class Auth extends React.Component {
     state = {
         email: '',
         password: '',
-        isUserLoggedIn: false
+        isUserLoggedIn: true
     }
 
     render() {
         return (
             <div>
-                <LoginForm>
+                {
+                    this.state.isUserLoggedIn
+                        ?
+                        this.props.children
+                        :
+                        <LoginForm>
 
-                </LoginForm>
+                        </LoginForm>
+                }
             </div>
         )
     }
