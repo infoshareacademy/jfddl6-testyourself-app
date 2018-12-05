@@ -10,15 +10,7 @@ import Subheader from 'material-ui/Subheader';
 import { unifyString } from '../ListView/utils'
 import Checkbox from 'material-ui/Checkbox';
 import Snackbar from 'material-ui/Snackbar';
-// import MyList from '../ListView/MyList';
 
-
-
-
-//const headlines = ["Category", "Difficulty", "Type", "Question", "Correct Answer", "Incorrect Answer"]
-//const category = ["Science Computers", "Animals", "Geography", "Mythology",]
-//const difficulty = ["easy", "medium", "hard"]
-//const type = ["multiple", "open"]
 
 const style = {
     paper: {
@@ -70,7 +62,7 @@ class AddTestView extends React.Component {
                 }
                 const questionsArray = Object.entries(data)
                 const questionsList = questionsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy
+                    values.id = id
                     return values
                 })
                 this.setState({ questions: questionsList })
@@ -92,20 +84,18 @@ class AddTestView extends React.Component {
     }
 
     onClickSaveHandler = (event) => {
-        // if (this.state.createdTest !== '' && this.state.category !== '' && this.state.description !== '' && this.state.img !== '' && this.state.question !== '') {
-            this.postToFirebase()
-            this.setState({
-                open: true
-            })
-        // } else {
-           
-        // }
+
+        this.postToFirebase()
+        this.setState({
+            open: true
+        })
+
     }
     handleRequestClose = () => {
         this.setState({
-          open: false,
+            open: false,
         });
-      };
+    };
 
 
 
@@ -162,7 +152,6 @@ class AddTestView extends React.Component {
 
                         <Row center="sm">
                             <Col lg={8} />
-                            {/*nazwa testu */}
                             <TextField
                                 floatingLabelText="Name Your Test"
                                 fullWidth={true}
@@ -176,7 +165,6 @@ class AddTestView extends React.Component {
                                     value={this.state.chosenCategoryFilter + 1}
                                     onChange={this.onSearchSelectFieldValueChangeHandler}
                                 >
-                                    {/* {console.log(this.state.chosenCategoryFilter + 1)} */}
                                     {this.state.categoryFilters.map((filter, index) => (
                                         <MenuItem
                                             key={index}
@@ -218,8 +206,6 @@ class AddTestView extends React.Component {
                                                 primaryText={question.question}
                                                 leftCheckbox={<Checkbox
                                                     onClick={() => this.onCheckBoxSelectionHandler(question.id)} />}
-                                            //onClick={() => props.onClickListItemHandler(question)}
-
                                             />
                                         ))
                                 }
@@ -241,7 +227,7 @@ class AddTestView extends React.Component {
                             message="Your test has been added to the database"
                             autoHideDuration={4000}
                             onRequestClose={this.handleRequestClose}
-                            
+
                         />
                     </div>
                 </Grid>
