@@ -9,7 +9,9 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import { unifyString } from '../ListView/utils'
 import Checkbox from 'material-ui/Checkbox';
+import Snackbar from 'material-ui/Snackbar';
 // import MyList from '../ListView/MyList';
+
 
 
 
@@ -45,6 +47,7 @@ class AddTestView extends React.Component {
             question: "",
             answer: "",
             questions: [],
+            open: false,
             chosenCategoryFilter: 0,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             createdTest: {
@@ -89,21 +92,27 @@ class AddTestView extends React.Component {
     }
 
     onClickSaveHandler = (event) => {
-        if (this.state.createdTest !== '' && this.state.createdTest.length < 30 && this.state.category !== '' && this.state.description !== '' && this.state.img !== '' && this.state.question !== '') {
-          this.props.toggleNotification('Test was added successfully!')
-          this.postToFirebase()
-        }  else {
-          this.props.toggleNotification('Something went wrong! Please try again! :)')
-        }
-      }
+        // if (this.state.createdTest !== '' && this.state.category !== '' && this.state.description !== '' && this.state.img !== '' && this.state.question !== '') {
+            this.postToFirebase()
+            this.setState({
+                open: true
+            })
+        // } else {
+           
+        // }
+    }
+    handleRequestClose = () => {
+        this.setState({
+          open: false,
+        });
+      };
 
 
 
     postToFirebase = () => {
-        let test = this.state.createdTest
-        fetch('https://test-yourself-95f1a.firebaseio.com/', {
+        fetch('https://test-yourself-95f1a.firebaseio.com/tests.json', {
             method: 'POST',
-            body: JSON.stringify(test)
+            body: JSON.stringify(this.state.createdTest)
         })
     }
     onTextInputChangeHandler = (event) => {
@@ -123,7 +132,7 @@ class AddTestView extends React.Component {
         })
     }
 
-    
+
     onCheckBoxSelectionHandler = (id) => {
         const newQuestions = {
             ...this.state.createdTest.questions,
@@ -227,7 +236,13 @@ class AddTestView extends React.Component {
                                 onClick={this.onClickSaveHandler}
                             />
                         </Row>
-
+                        <Snackbar
+                            open={this.state.open}
+                            message="Your test has been added to the database"
+                            autoHideDuration={4000}
+                            onRequestClose={this.handleRequestClose}
+                            
+                        />
                     </div>
                 </Grid>
             </Paper>
