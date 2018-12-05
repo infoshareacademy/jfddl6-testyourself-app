@@ -31,16 +31,6 @@ const style = {
     }
 }
 
-// const initialState = {
-//     value: "",
-//     category: "",
-//     difficulty: "",
-//     type: "",
-//     question: "",
-//     answer: "",
-//     questions: []
-
-// }
 
 class AddTestView extends React.Component {
 
@@ -88,12 +78,14 @@ class AddTestView extends React.Component {
     }
 
 
-    // reset() {
-    //     this.setState(initialState)
-    // }
-    onClickSaveHandler = () => {
-
-    }
+    handleClick = (event) => {
+        if (this.state.name !== '' && this.state.name.length < 30 && this.state.kcal !== '' && this.state.category !== '') {
+          this.props.toggleStatement('Product was added successfully!')
+          this.postToFirebase()
+        }  else {
+          this.props.toggleStatement('Something went wrong! Please try again! :)')
+        }
+      }
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => {
         this.setState({
@@ -106,16 +98,11 @@ class AddTestView extends React.Component {
 
     }
 
-    categoryChange = (event) => this.setState({ category: event.target.value })
 
-    difficultyChange = (event) => this.setState({ difficulty: event.target.value })
-
-    typeChange = (event) => this.setState({ type: event.target.value })
-
-    getFromFirebase = () => {
+    postToFirebase = () => {
         let product = this.state
         fetch('https://test-yourself-95f1a.firebaseio.com/', {
-            method: 'GET',
+            method: 'POST',
             body: JSON.stringify(product)
         })
     }
@@ -123,7 +110,17 @@ class AddTestView extends React.Component {
         this.setState({
             createdTest: {
                 ...this.state.createdTest,
-                description: event.target.value } })
+                description: event.target.value
+            }
+        })
+    }
+    onTextUrlInputChangeHandler = (event) => {
+        this.setState({
+            createdTest: {
+                ...this.state.createdTest,
+                img: event.target.value
+            }
+        })
     }
 
     handleClick = (event) => {
@@ -135,15 +132,17 @@ class AddTestView extends React.Component {
         }
         this.reset()
     }
-    onCheckBoxSelectionHandler=(id)=>{
+    onCheckBoxSelectionHandler = (id) => {
         const newQuestions = {
             ...this.state.createdTest.questions,
         };
         newQuestions[id] = true
-        this.setState({createdTest: {
-            ...this.state.createdTest,
-            questions: newQuestions
-        }})
+        this.setState({
+            createdTest: {
+                ...this.state.createdTest,
+                questions: newQuestions
+            }
+        })
     }
 
     render() {
@@ -153,17 +152,15 @@ class AddTestView extends React.Component {
                 <Grid fluid>
                     <Row
                         center="sm">
-                        <Col lg={8}
-                        />
+                        <Col lg={8} />
                         <h1>
-                            Add Test
+                            Add Your own Test!
                         </h1>
                     </Row>
                     <div>
 
                         <Row center="sm">
-                            <Col lg={8}
-                            />
+                            <Col lg={8} />
                             {/*nazwa testu */}
                             <TextField
                                 floatingLabelText="Name Your Test"
@@ -191,15 +188,17 @@ class AddTestView extends React.Component {
 
                             </Col>
                         </Row>
-                        <TextField
+                        <Row center="sm">
+                            <Col lg={8} />
+                            <TextField
                                 floatingLabelText="IMAGE"
                                 fullWidth={true}
-                                onChange={this}
+                                onChange={this.onTextUrlInputChangeHandler}
                             />
-                        
+                        </Row>
+
                         <Row center="sm">
-                            <Col lg={8}
-                            />
+                            <Col lg={8} />
                             <List>
 
                                 < Subheader > Available Questions</Subheader>
@@ -217,7 +216,7 @@ class AddTestView extends React.Component {
                                                 key={question.id}
                                                 primaryText={question.question}
                                                 leftCheckbox={<Checkbox
-                                                    onClick={()=>this.onCheckBoxSelectionHandler(question.id)} />}
+                                                    onClick={() => this.onCheckBoxSelectionHandler(question.id)} />}
                                             //onClick={() => props.onClickListItemHandler(question)}
 
                                             />
