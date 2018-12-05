@@ -100,10 +100,10 @@ class AddTestView extends React.Component {
 
 
     postToFirebase = () => {
-        let product = this.state.createdTest
+        let test = this.state.createdTest
         fetch('https://test-yourself-95f1a.firebaseio.com/', {
             method: 'POST',
-            body: JSON.stringify(product)
+            body: JSON.stringify(test)
         })
     }
     onTextInputChangeHandler = (event) => {
