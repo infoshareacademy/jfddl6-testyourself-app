@@ -77,16 +77,6 @@ class AddTestView extends React.Component {
         this.loadData()
     }
 
-
-    handleClick = (event) => {
-        if (this.state.name !== '' && this.state.name.length < 30 && this.state.kcal !== '' && this.state.category !== '') {
-          this.props.toggleStatement('Product was added successfully!')
-          this.postToFirebase()
-        }  else {
-          this.props.toggleStatement('Something went wrong! Please try again! :)')
-        }
-      }
-
     onSearchSelectFieldValueChangeHandler = (event, index, value) => {
         this.setState({
             chosenCategoryFilter: parseInt(value, 10) - 1,
@@ -98,9 +88,19 @@ class AddTestView extends React.Component {
 
     }
 
+    onClickSaveHandler = (event) => {
+        if (this.state.createdTest !== '' && this.state.createdTest.length < 30 && this.state.category !== '' && this.state.description !== '' && this.state.img !== '' && this.state.question !== '') {
+          this.props.toggleNotification('Test was added successfully!')
+          this.postToFirebase()
+        }  else {
+          this.props.toggleNotification('Something went wrong! Please try again! :)')
+        }
+      }
+
+
 
     postToFirebase = () => {
-        let product = this.state
+        let product = this.state.createdTest
         fetch('https://test-yourself-95f1a.firebaseio.com/', {
             method: 'POST',
             body: JSON.stringify(product)
@@ -123,15 +123,7 @@ class AddTestView extends React.Component {
         })
     }
 
-    handleClick = (event) => {
-        this.props.toggleStatement('Something went wrong. Please try again!')
-        if (this.state.name !== '') {
-            this.props.toggleStatement('Product was added successfully!')
-            fetch('https://test-yourself-95f1a.firebaseio.com/', {
-            })
-        }
-        this.reset()
-    }
+    
     onCheckBoxSelectionHandler = (id) => {
         const newQuestions = {
             ...this.state.createdTest.questions,
