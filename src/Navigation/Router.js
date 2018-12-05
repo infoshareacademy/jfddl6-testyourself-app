@@ -13,6 +13,14 @@ import TestView from './../views/TestView/TestView'
 
 class Router extends React.Component {
 
+    state = {
+        isDrawerOpen: false
+    }
+
+    toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
+
+    handleClose = () => this.setState({ isDrawerOpen: false });
+
     render() {
 
         return (

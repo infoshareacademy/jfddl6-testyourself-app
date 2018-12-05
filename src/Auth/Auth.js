@@ -10,7 +10,7 @@ class Auth extends React.Component {
     state = {
         email: '',
         password: '',
-        isUserLoggedIn: true
+        isUserLoggedIn: false
     }
 
     componentDidMount() {
