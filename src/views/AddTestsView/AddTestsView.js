@@ -57,7 +57,7 @@ class AddTestView extends React.Component {
             .then(response => response.json())
             .then(data => {
                 if (!data) {
-                    this.setState({ questions: [] })
+                    this.setState({ questions: {} })
                     return
                 }
                 const questionsArray = Object.entries(data)
@@ -84,12 +84,15 @@ class AddTestView extends React.Component {
     }
 
     onClickSaveHandler = (event) => {
-
-        this.postToFirebase()
-        this.setState({
-            open: true
-        })
-
+        if (this.state.createdTest.category !== '' &&
+            this.state.createdTest.description !== '' &&
+            Object.keys(this.state.createdTest.questions).length !== 0
+        ) {
+            this.postToFirebase()
+            this.setState({
+                open: true
+            })
+        } else{ console.log('alert')}
     }
     handleRequestClose = () => {
         this.setState({
