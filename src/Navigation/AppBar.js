@@ -3,8 +3,8 @@ import MuiAppBar from 'material-ui/AppBar'
 
 const AppBar = (props) => (
     <MuiAppBar
-    title={props.title}
-    onLeftIconButtonClick={props.onLeftIconButtonClick}
+        title={props.title}
+        onLeftIconButtonClick={props.toggleDrawer}
     >
         {props.children}
     </MuiAppBar>
