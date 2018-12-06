@@ -25,6 +25,7 @@ class AvailableTestView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            value:0,
             selectedFieldValue: 0,
             chosenCategoryFilter: 0,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
@@ -101,22 +102,22 @@ class AvailableTestView extends React.Component {
                     ))}
                 </SelectField>
                 <TextField
-                    floatingLabelText="Question 1"
+                    floatingLabelText="Incorrect answer"
                     fullWidth={true}
                     onChange={() => { }}
                 />
                 <TextField
-                    floatingLabelText="Question 2"
+                    floatingLabelText="Incorrect answer"
                     fullWidth={true}
                     onChange={() => { }}
                 />
                 <TextField
-                    floatingLabelText="Question 3"
+                    floatingLabelText="Incorrect answer"
                     fullWidth={true}
                     onChange={() => { }}
                 />
                 <TextField
-                    floatingLabelText="Question 4"
+                    floatingLabelText="Correct answer"
                     fullWidth={true}
                     onChange={() => { }}
                 />
