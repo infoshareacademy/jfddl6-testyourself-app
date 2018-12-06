@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
 import BarChart from './BarChart'
 import { database } from '../../firebase'
+import { mapObjectToArray } from './utils'
 
 const style = {
     paper: {
@@ -14,12 +15,14 @@ const style = {
     }
 }
 
+const dbMessagesRef = database.ref('/tests')
+console.log(dbMessagesRef)
 
 
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
-        tests: null
+        tests: []
     }
 
     componentDidMount() {
@@ -35,14 +38,13 @@ class DashboardView extends React.Component {
                     tests: mapObjectToArray(snapshot.val())
 
                 })
-                console.log(snapshot(val))
+                // console.log(snapshot(val))
             }
         )
     }
 
 
     resizeListener = () => {
-        console.log(window.innerWidth)
         this.setState({
             viewportWidth: window.innerWidth
         })
@@ -109,7 +111,8 @@ class DashboardView extends React.Component {
             'resize',
             this.resizeListener
         )
-    }
+    } 
+    // dbMessagesRef.off()
 }
 
 export default DashboardView
