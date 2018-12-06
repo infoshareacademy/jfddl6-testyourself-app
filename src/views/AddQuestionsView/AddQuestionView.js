@@ -25,14 +25,14 @@ class AvailableTestView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            open:false,
             value:0,
-            selectedFieldValue: 0,
             chosenCategoryFilter: 0,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             chosenLevel: 0,
             levelFilters: ['Easy', 'Medium', 'Hard'],
             newQuestion: {
-                category: '',
+                category: 'Any',
                 correct_answer: '',
                 difficulty: '',
                 incorrect_answers: {
@@ -53,7 +53,7 @@ class AvailableTestView extends React.Component {
             chosenCategoryFilter: value,
             newQuestion: {
                 ...this.state.newQuestion,
-                category: this.state.categoryFilters[this.state.chosenCategoryFilter]
+                category: this.state.categoryFilters[value]
             }
         })
     }
@@ -62,7 +62,7 @@ class AvailableTestView extends React.Component {
             chosenLevel: value,
             newQuestion: {
                 ...this.state.newQuestion,
-                difficulty: this.state.levelFilters[this.state.chosenLevel]
+                difficulty: this.state.levelFilters[value]
             }
         })
     }
@@ -76,13 +76,13 @@ class AvailableTestView extends React.Component {
                         </h2>
                 <SelectField
                     floatingLabelText="Choose category"
-                    value={this.state.chosenCategoryFilter + 1}
+                    value={this.state.chosenCategoryFilter}
                     onChange={this.handleCategoryChange}
                 >
                     {this.state.categoryFilters.map((category, index) => (
                         <MenuItem
                             key={index}
-                            value={index + 1}
+                            value={index}
                             primaryText={category}
                         />
                     ))}
@@ -96,7 +96,7 @@ class AvailableTestView extends React.Component {
                     {this.state.levelFilters.map((level, index) => (
                         <MenuItem
                             key={index}
-                            value={index + 1}
+                            value={index }
                             primaryText={level}
                         />
                     ))}

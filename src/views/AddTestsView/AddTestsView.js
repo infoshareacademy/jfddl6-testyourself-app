@@ -44,7 +44,7 @@ class AddTestView extends React.Component {
             isFormFilledCorrectly: false,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             createdTest: {
-                category: "",
+                category: "Any",
                 description: "",
                 favorite: false,
                 img: "",
@@ -75,10 +75,10 @@ class AddTestView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => {
         this.setState({
-            chosenCategoryFilter: parseInt(value, 10) - 1,
+            chosenCategoryFilter: value,
             createdTest: {
                 ...this.state.createdTest,
-                category: this.state.categoryFilters[this.state.chosenCategoryFilter + 1]
+                category: this.state.categoryFilters[value]
             }
         })
 
@@ -164,13 +164,13 @@ class AddTestView extends React.Component {
 
                 <SelectField
                     floatingLabelText="Categories"
-                    value={this.state.chosenCategoryFilter + 1}
+                    value={this.state.chosenCategoryFilter}
                     onChange={this.onSearchSelectFieldValueChangeHandler}
                 >
                     {this.state.categoryFilters.map((filter, index) => (
                         <MenuItem
                             key={index}
-                            value={index + 1}
+                            value={index}
                             primaryText={filter}
                         />
                     ))}
