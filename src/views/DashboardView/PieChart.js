@@ -1,36 +1,33 @@
 import React from 'react'
 import { PieChart, Pie, Tooltip } from "recharts";
 
-
 const data = [
     {
         value: 25,
         name: 'Science Computers',
-        fill:'blue'
+        fill: 'blue'
     },
     {
         value: 20,
         name: 'Animals',
-        fill:'red'
+        fill: 'red'
     },
     {
         value: 15,
         name: 'Geography',
-        fill:'purple'
+        fill: 'purple'
     },
     {
         value: 35,
         name: 'Mythology',
-        fill:'green'
+        fill: 'green'
     },
     {
         value: 15,
         name: 'New-added test',
-        fill:'yellow'
+        fill: 'yellow'
     }
 ]
-
-
 
 const Chart = (props) => (
     <div>
@@ -41,10 +38,15 @@ const Chart = (props) => (
                 props.viewportWidth / 2.5
         }
             height={500}>
-            <Pie data={data} dataKey="value" nameKey="name"  />
+            <Pie
+                data={props.data || data}
+                dataKey="value"
+                nameKey="name"
+            />
             <Tooltip />
         </PieChart>
     </div>
-);
+)
+
 export default Chart
 
