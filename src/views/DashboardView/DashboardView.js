@@ -28,14 +28,18 @@ class DashboardView extends React.Component {
             this.resizeListener
         )
 
-        database.ref('/tests').on(
+        dbMessagesRef.on(
             'value',
             snapshot => {
-                this.setState({ tests: snapshot.val() })
-                console.log(snapshot.val())
+                this.setState({
+                    tests: mapObjectToArray(snapshot.val())
+
+                })
+                console.log(snapshot(val))
             }
         )
     }
+
 
     resizeListener = () => {
         console.log(window.innerWidth)
