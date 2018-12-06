@@ -1,6 +1,6 @@
 import React from 'react'
 import Paper from "material-ui/Paper"
-import { Grid, Row, Col } from "react-flexbox-grid"
+
 import SelectField from "material-ui/SelectField"
 import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
@@ -41,6 +41,7 @@ class AddTestView extends React.Component {
             questions: [],
             open: false,
             chosenCategoryFilter: 0,
+            isFormFilledCorrectly: false,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             createdTest: {
                 category: "",
@@ -88,11 +89,16 @@ class AddTestView extends React.Component {
             this.state.createdTest.description !== '' &&
             Object.keys(this.state.createdTest.questions).length !== 0
         ) {
+            this.setState({ isFormFilledCorrectly: true })
             this.postToFirebase()
             this.setState({
                 open: true
             })
-        } else{ console.log('alert')}
+        } else {
+            this.setState({
+                open: true
+            })
+        }
     }
     handleRequestClose = () => {
         this.setState({
@@ -143,97 +149,85 @@ class AddTestView extends React.Component {
         return (
             <Paper
                 style={style.paper}>
-                <Grid fluid>
-                    <Row
-                        center="sm">
-                        <Col lg={8} />
-                        <h1>
-                            Add Your own Test!
-                        </h1>
-                    </Row>
-                    <div>
 
-                        <Row center="sm">
-                            <Col lg={8} />
-                            <TextField
-                                floatingLabelText="Name Your Test"
-                                fullWidth={true}
-                                onChange={this.onTextInputChangeHandler}
-                            />
-                        </Row>
-                        <Row center="sm">
-                            <Col lg={8}>
-                                <SelectField
-                                    floatingLabelText="Categories"
-                                    value={this.state.chosenCategoryFilter + 1}
-                                    onChange={this.onSearchSelectFieldValueChangeHandler}
-                                >
-                                    {this.state.categoryFilters.map((filter, index) => (
-                                        <MenuItem
-                                            key={index}
-                                            value={index + 1}
-                                            primaryText={filter}
-                                        />
-                                    ))}
-
-                                </SelectField>
-
-                            </Col>
-                        </Row>
-                        <Row center="sm">
-                            <Col lg={8} />
-                            <TextField
-                                floatingLabelText="IMAGE"
-                                fullWidth={true}
-                                onChange={this.onTextUrlInputChangeHandler}
-                            />
-                        </Row>
-
-                        <Row center="sm">
-                            <Col lg={8} />
-                            <List>
-
-                                < Subheader > Available Questions</Subheader>
-                                {
-                                    this.state.questions &&
-                                    this.state.questions.map &&
-                                    this.state.questions
-                                        .filter((question) => (
-                                            (this.state.chosenCategoryFilter === 0) ?
-                                                true :
-                                                unifyString(question.category) === unifyString(this.state.categoryFilters[this.state.chosenCategoryFilter])
-                                        ))
-                                        .map(question => (
-                                            <ListItem
-                                                key={question.id}
-                                                primaryText={question.question}
-                                                leftCheckbox={<Checkbox
-                                                    onClick={() => this.onCheckBoxSelectionHandler(question.id)} />}
-                                            />
-                                        ))
-                                }
-                            </List >
+                <h2>
+                    Add Your own Test!
+                        </h2>
 
 
-                        </Row>
-                        <Row center="sm">
-                            <RaisedButton
-                                label="Save"
-                                primary={true}
-                                fullWidth={true}
-                                style={style.button}
-                                onClick={this.onClickSaveHandler}
-                            />
-                        </Row>
-                        <Snackbar
-                            open={this.state.open}
-                            message="Your test has been added to the database"
-                            autoHideDuration={4000}
-                            onRequestClose={this.handleRequestClose}
 
+                <TextField
+                    floatingLabelText="Name Your Test"
+                    fullWidth={true}
+                    onChange={this.onTextInputChangeHandler}
+                />
+
+                <SelectField
+                    floatingLabelText="Categories"
+                    value={this.state.chosenCategoryFilter + 1}
+                    onChange={this.onSearchSelectFieldValueChangeHandler}
+                >
+                    {this.state.categoryFilters.map((filter, index) => (
+                        <MenuItem
+                            key={index}
+                            value={index + 1}
+                            primaryText={filter}
                         />
-                    </div>
-                </Grid>
+                    ))}
+
+                </SelectField>
+
+
+                <TextField
+                    floatingLabelText="IMAGE"
+                    fullWidth={true}
+                    onChange={this.onTextUrlInputChangeHandler}
+                />
+
+                <List>
+
+                    < Subheader > Available Questions</Subheader>
+                    {
+                        this.state.questions &&
+                        this.state.questions.map &&
+                        this.state.questions
+                            .filter((question) => (
+                                (this.state.chosenCategoryFilter === 0) ?
+                                    true :
+                                    unifyString(question.category) === unifyString(this.state.categoryFilters[this.state.chosenCategoryFilter])
+                            ))
+                            .map(question => (
+                                <ListItem
+                                    key={question.id}
+                                    primaryText={question.question}
+                                    leftCheckbox={<Checkbox
+                                        onClick={() => this.onCheckBoxSelectionHandler(question.id)} />}
+                                />
+                            ))
+                    }
+                </List >
+
+
+
+                <RaisedButton
+                    label="Save"
+                    primary={true}
+                    fullWidth={true}
+                    style={style.button}
+                    onClick={this.onClickSaveHandler}
+                />
+
+                <Snackbar
+                    open={this.state.open}
+                    message={this.state.isFormFilledCorrectly ?
+                        "Your test has been added to the database" :
+                        "Your test hasn't been filled in correctly"
+                    }
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+
+                />
+
             </Paper>
         )
     }
