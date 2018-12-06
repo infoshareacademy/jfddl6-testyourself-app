@@ -25,8 +25,8 @@ class AvailableTestView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open:false,
-            value:0,
+            open: false,
+            value: 0,
             chosenCategoryFilter: 0,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             chosenLevel: 0,
@@ -67,6 +67,20 @@ class AvailableTestView extends React.Component {
         })
     }
 
+    makeOnTextInputChangeHandler = (index) => (event) => {
+        const newIncorrectAnswer = {
+            ...this.state.newQuestion.incorrect_answers,
+            [index]: event.target.value
+        }
+        console.log(newIncorrectAnswer)
+        this.setState({
+            newQuestion: {
+                ...this.state.newQuestion,
+                incorrect_answers: newIncorrectAnswer
+            }
+        })
+    }
+
     render() {
         return (
             <Paper
@@ -96,7 +110,7 @@ class AvailableTestView extends React.Component {
                     {this.state.levelFilters.map((level, index) => (
                         <MenuItem
                             key={index}
-                            value={index }
+                            value={index}
                             primaryText={level}
                         />
                     ))}
@@ -104,22 +118,22 @@ class AvailableTestView extends React.Component {
                 <TextField
                     floatingLabelText="Incorrect answer"
                     fullWidth={true}
-                    onChange={() => { }}
+                    onChange={this.makeOnTextInputChangeHandler(0)}
                 />
                 <TextField
                     floatingLabelText="Incorrect answer"
                     fullWidth={true}
-                    onChange={() => { }}
+                    onChange={this.makeOnTextInputChangeHandler(1)}
                 />
                 <TextField
                     floatingLabelText="Incorrect answer"
                     fullWidth={true}
-                    onChange={() => { }}
+                    onChange={this.makeOnTextInputChangeHandler(2)}
                 />
                 <TextField
                     floatingLabelText="Correct answer"
                     fullWidth={true}
-                    onChange={() => { }}
+                    onChange={this.makeOnTextInputChangeHandler(3)}
                 />
                 <RaisedButton
                     label="Save question"
