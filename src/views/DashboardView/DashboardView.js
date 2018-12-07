@@ -38,7 +38,6 @@ class DashboardView extends React.Component {
                     tests: mapObjectToArray(snapshot.val())
 
                 })
-                // console.log(snapshot(val))
             }
         )
     }
@@ -111,8 +110,9 @@ class DashboardView extends React.Component {
             'resize',
             this.resizeListener
         )
-    } 
-    // dbMessagesRef.off()
+        dbMessagesRef.off()
+    }
+
 }
 
 export default DashboardView
