@@ -5,6 +5,7 @@ import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
 import Snackbar from 'material-ui/Snackbar';
+import {database}from '../../firebase'
 
 const style = {
     paper: {
@@ -80,6 +81,29 @@ class AvailableTestView extends React.Component {
             }
         })
     }
+    onTextQuestionInputChangeHandler = (event) => {
+        this.setState({
+            newQuestion: {
+                ...this.state.newQuestion,
+                question: event.target.value
+            }
+        })
+    }
+
+    onTextCorrectAnswerChangeHandler = (event) => {
+        this.setState({
+            newQuestion: {
+                ...this.state.newQuestion,
+                correct_answer: event.target.value
+            }
+        })
+    }
+    onSaveButtonClickHandler=()=>{
+        database.ref('/questions').push(
+           this.state.newQuestion
+        )
+    }
+
 
     render() {
         return (
@@ -116,6 +140,12 @@ class AvailableTestView extends React.Component {
                     ))}
                 </SelectField>
                 <TextField
+                    floatingLabelText="Question"
+                    fullWidth={true}
+                    onChange={this.onTextQuestionInputChangeHandler}
+                />
+
+                <TextField
                     floatingLabelText="Incorrect answer"
                     fullWidth={true}
                     onChange={this.makeOnTextInputChangeHandler(0)}
@@ -133,14 +163,14 @@ class AvailableTestView extends React.Component {
                 <TextField
                     floatingLabelText="Correct answer"
                     fullWidth={true}
-                    onChange={this.makeOnTextInputChangeHandler(3)}
+                    onChange={this.onTextCorrectAnswerChangeHandler}
                 />
                 <RaisedButton
                     label="Save question"
                     primary={true}
                     fullWidth={true}
                     style={style.button}
-                    onClick={() => { }}
+                    onClick={this.onSaveButtonClickHandler}
                 />
                 <Snackbar
                     open={this.state.open}
