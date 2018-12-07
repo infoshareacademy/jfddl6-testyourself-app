@@ -41,6 +41,13 @@ const LoginForms = (props) => (
       onClick={props.onLogInByGoogleClick}
       fullWidth={true}
     />
+    <RaisedButton
+      style={{ margin: '5px 0' }}
+      label={'Reset password'}
+      
+      onClick={props.onPasswordReset}
+      fullWidth={true}
+    />
   </Paper>
 )
 

@@ -8,7 +8,8 @@ import {
   logInByGoogleAsyncAction,
   logInAsyncAction,
   emailChangeAction,
-  passwordChangeAction
+  passwordChangeAction,
+  resetPasswordAsyncAction
 } from '../state/auth'
 
 class Auth extends React.Component {
@@ -30,6 +31,7 @@ class Auth extends React.Component {
           onPasswordChangeHandler={this.props._passwordChangeAction}
           onLogInClick={this.props._logInAsyncAction}
           onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
+          onPasswordReset={this.props._passwordResetAsyncAction}
         />
     )
   }
@@ -47,6 +49,7 @@ const mapDispatchToProps = dispatch => ({
   _logInAsyncAction: () => dispatch(logInAsyncAction()),
   _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
   _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
+  _passwordResetAsyncAction: () => dispatch(resetPasswordAsyncAction())
 })
 
 export default connect(

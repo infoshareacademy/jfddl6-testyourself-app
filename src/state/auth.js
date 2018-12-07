@@ -31,12 +31,18 @@ export const logInAsyncAction = () => (dispatch, getState) => {
 
     auth.signInWithEmailAndPassword(email, password)
         .catch(error => {
-            alert('Something is wrong! Check console for error details!')
+            alert('Wrong user name or password, try again.')
         })
 }
 
+export const resetPasswordAsyncAction = () => (dispatch, getState) => {
+    auth.sendPasswordResetEmail(getState().auth.email)
+        .then(() => alert('Password reset link has been sent on the email'))
+        .catch(error => alert('Wrong user name or password, try again.'))
+}
+
 const saveLogInTimestampAsyncAction = () => (dispatch, getState) => {
-    database.ref('jfddl6/loginsLogs').push({
+    database.ref('usersLogins/loginsLogs').push({
         timestamp: Date.now()
     })
 }
