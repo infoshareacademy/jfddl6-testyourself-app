@@ -22,7 +22,8 @@ console.log(dbMessagesRef)
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
-        tests: []
+        tests: [],
+        newTests: ''
     }
 
     componentDidMount() {
@@ -48,7 +49,7 @@ class DashboardView extends React.Component {
             viewportWidth: window.innerWidth
         })
     }
-
+    dataChangeHandler = event => this.setState({ newTests: event.target.value })
 
     render() {
         return (
