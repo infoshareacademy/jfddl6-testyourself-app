@@ -1,12 +1,10 @@
 import React from 'react'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
 
 import LoginForm from './LoginForm'
 
 import { connect } from 'react-redux'
 import {
   initAuthChangeListeningAsyncAction,
-  logOutAsyncAction,
   logInByGoogleAsyncAction,
   logInAsyncAction,
   emailChangeAction,
@@ -22,19 +20,6 @@ class Auth extends React.Component {
     return (
       this.props._isUserLoggedIn ?
         <div>
-          <FloatingActionButton
-            style={{
-              position: 'fixed',
-              top: 10,
-              right: 10,
-              zIndex: 9999,
-              color: 'white'
-            }}
-            secondary={true}
-            onClick={this.props._logOutAsyncAction}
-          >
-            X
-          </FloatingActionButton>
           {this.props.children}
         </div>
         :
@@ -58,7 +43,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
-  _logOutAsyncAction: () => dispatch(logOutAsyncAction()),
   _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
   _logInAsyncAction: () => dispatch(logInAsyncAction()),
   _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),

@@ -19,7 +19,7 @@ class Router extends React.Component {
 
     toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
 
-    handleClose = () => this.setState({ isDrawerOpen: false });
+    handleClose = () => this.setState({ isDrawerOpen: false })
 
     render() {
 
