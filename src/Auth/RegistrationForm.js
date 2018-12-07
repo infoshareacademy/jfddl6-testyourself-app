@@ -37,7 +37,7 @@ const RegistrationForm = (props) => (
         />
         <RaisedButton
             style={{ margin: '5px 0' }}
-            label={'Sign In!'}
+            label={'Sign Up!'}
             primary={true}
             onClick={props.onLogInClick}
             fullWidth={true}

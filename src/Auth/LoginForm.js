@@ -36,7 +36,7 @@ const LoginForms = (props) => (
     />
     <RaisedButton
       style={{ margin: '5px 0' }}
-      label={'Log in y Google'}
+      label={'Log in by Google'}
       secondary={true}
       onClick={props.onLogInByGoogleClick}
       fullWidth={true}
