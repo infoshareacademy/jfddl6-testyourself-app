@@ -1,10 +1,12 @@
 import React from 'react'
+
 import Paper from "material-ui/Paper"
 import SelectField from "material-ui/SelectField"
 import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
-import Snackbar from 'material-ui/Snackbar';
+import Snackbar from 'material-ui/Snackbar'
+
 import { database } from '../../firebase'
 
 const style = {
