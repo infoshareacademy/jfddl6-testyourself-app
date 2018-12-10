@@ -156,7 +156,7 @@ class AddTestView extends React.Component {
                 style={style.paper}>
 
                 <h2>
-                    Add Your own Test!
+                    Compose your own test
                         </h2>
 
 

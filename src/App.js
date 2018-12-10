@@ -50,7 +50,7 @@ class App extends Component {
               <MenuItem
                 handleClose={this.handleClose}
                 to="/add-tests"
-                text="Add tests"
+                text="Compose your own test"
               />
               <MenuItem
                 handleClose={this.handleClose}
