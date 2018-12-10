@@ -30,7 +30,7 @@ const style = {
 
 class TestView extends React.Component {
     constructor(props) {
-        super()
+        super(props)
         this.state.id = props.match.params.id
     }
     state = {
@@ -42,7 +42,7 @@ class TestView extends React.Component {
     }
 
     componentDidMount() {
-        database.ref(`/tests/${this.state.id}`).once(
+        database.ref(`/tests/${this.state.id}`).on(
             'value',
             snapshot => {
                 this.setState({ test: snapshot.val() })
@@ -50,7 +50,6 @@ class TestView extends React.Component {
                 this.setState({ numOfQuestions: Object.values(this.state.testArray[4]).length })
                 return this.setState({ favorite: snapshot.val().favorite })
             }
-
         )
     }
 
@@ -80,7 +79,7 @@ class TestView extends React.Component {
                 style={style.paper}
             >
 
-                <h1 style={style.textName}>{`#Test name: ${this.state.test.description}`}</h1>
+                <h2 style={style.textName}>{`#Test name: ${this.state.test.description}`}</h2>
                 <h3 style={style.text}>{`Category: ${this.state.test.category}`}</h3>
                 <h3 style={style.text}>{`Number of questions: ${this.state.numOfQuestions}`}</h3>
                 {/* <h3 style={style.text}>{`Difficulty: `}</h3> */}

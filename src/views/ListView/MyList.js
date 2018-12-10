@@ -10,13 +10,11 @@ import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 import { unifyString } from './utils'
 
-
 const style = {
     paper: {
         margin: 20,
         padding: 20
     }
-
 }
 
 const MyList = (props) => (
@@ -25,7 +23,6 @@ const MyList = (props) => (
         style={style.paper}
     >
         <List>
-
             < Subheader > Available Tests</Subheader>
             {
                 props.tests &&

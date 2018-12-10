@@ -61,17 +61,13 @@ class ListView extends React.Component {
         return (
             <div>
                 <SearchView
-
                     searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
                     maxSearchedNumberOfQuestionsInTest={this.state.maxSearchedNumberOfQuestionsInTest}
-
                     onSearchTextChangeHandler={this.onSearchTextChangeHandler}
-
                     onSearchSliderValueChangeHandler={this.onSearchSliderValueChangeHandler}
                     onSearchSelectFieldValueChangeHandler={this.onSearchSelectFieldValueChangeHandler}
                     categoryFilters={this.state.categoryFilters}
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
-
                 />
                 <MyList
                     searchText={this.state.searchText}
