@@ -116,8 +116,6 @@ class AddTestView extends React.Component {
         });
     };
 
-
-
     postToFirebase = () => {
         database.ref(`/tests`).push(this.state.createdTest)
     }
