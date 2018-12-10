@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
+
 import SearchView from './SearchView/SearchView'
-
-
 import MyList from './MyList'
+
+import { database } from '../../firebase'
 
 class ListView extends React.Component {
     state = {
@@ -14,20 +15,16 @@ class ListView extends React.Component {
         chosenCategoryFilter: 0,
         categoryFilters: ['Any', "Science Computers", "Animals", "Geography", "Mythology"]
     }
+
     onSearchTextChangeHandler = (event) => { this.setState({ searchText: event.target.value }) }
-
     onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
-
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
     onFavoriteChangeHandler = (test) => {
-        fetch(
-            `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
-            {
-                method: 'PATCH',
-                body: JSON.stringify({ favorite: !test.favorite })
-            }
-        ).then(() => { this.loadData() })
+        database.ref(`/tests/${test.id}`).update({
+            favorite: !test.favorite
+        })
+        this.loadData()
     }
 
     onClickListItemHandler = (test) => {
@@ -35,24 +32,29 @@ class ListView extends React.Component {
     }
 
     loadData = () => {
-        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data) {
+        database.ref(`/tests`).on(
+            'value',
+            snapshot => {
+                if (!snapshot.val()) {
                     this.setState({ tests: [] })
                     return
                 }
-                const testsArray = Object.entries(data)
+                const testsArray = Object.entries(snapshot.val())
                 const testList = testsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy
+                    values.id = id
                     return values
                 })
                 this.setState({ tests: testList })
-            })
+            }
+        )
     }
 
     componentWillMount() {
         this.loadData()
+    }
+
+    componentWillUnmount(){
+        database.ref(`/tests`).off()
     }
 
     render() {
