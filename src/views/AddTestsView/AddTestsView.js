@@ -22,6 +22,10 @@ const style = {
     },
     item: {
         float: "center"
+    },
+    snackbar:{
+        width:'100%',
+        maxWidth:'100%',
     }
 }
 
@@ -44,7 +48,7 @@ class AddTestView extends React.Component {
             isFormFilledCorrectly: false,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             createdTest: {
-                category: "",
+                category: "Any",
                 description: "",
                 favorite: false,
                 img: "",
@@ -75,10 +79,10 @@ class AddTestView extends React.Component {
 
     onSearchSelectFieldValueChangeHandler = (event, index, value) => {
         this.setState({
-            chosenCategoryFilter: parseInt(value, 10) - 1,
+            chosenCategoryFilter: value,
             createdTest: {
                 ...this.state.createdTest,
-                category: this.state.categoryFilters[this.state.chosenCategoryFilter + 1]
+                category: this.state.categoryFilters[value]
             }
         })
 
@@ -100,6 +104,7 @@ class AddTestView extends React.Component {
             })
         }
     }
+
     handleRequestClose = () => {
         this.setState({
             open: false,
@@ -151,7 +156,7 @@ class AddTestView extends React.Component {
                 style={style.paper}>
 
                 <h2>
-                    Add Your own Test!
+                    Compose your own test
                         </h2>
 
 
@@ -164,13 +169,13 @@ class AddTestView extends React.Component {
 
                 <SelectField
                     floatingLabelText="Categories"
-                    value={this.state.chosenCategoryFilter + 1}
+                    value={this.state.chosenCategoryFilter}
                     onChange={this.onSearchSelectFieldValueChangeHandler}
                 >
                     {this.state.categoryFilters.map((filter, index) => (
                         <MenuItem
                             key={index}
-                            value={index + 1}
+                            value={index}
                             primaryText={filter}
                         />
                     ))}
@@ -219,9 +224,11 @@ class AddTestView extends React.Component {
 
                 <Snackbar
                     open={this.state.open}
+                    style={style.snackbar}
+                    bodyStyle={style.snackbar}
                     message={this.state.isFormFilledCorrectly ?
                         "Your test has been added to the database" :
-                        "Your test hasn't been filled in correctly"
+                        "Your test hasn't been filled correctly"
                     }
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
