@@ -5,7 +5,7 @@ import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
 import Snackbar from 'material-ui/Snackbar';
-import {database}from '../../firebase'
+import { database } from '../../firebase'
 
 const style = {
     paper: {
@@ -18,7 +18,10 @@ const style = {
     item: {
         float: "center"
     },
-
+    snackbar:{
+        width:'100%',
+        maxWidth:'100%',
+    }
 }
 
 class AvailableTestView extends React.Component {
@@ -29,13 +32,14 @@ class AvailableTestView extends React.Component {
             open: false,
             value: 0,
             chosenCategoryFilter: 0,
+            isFormFilledCorrectly: false,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             chosenLevel: 0,
             levelFilters: ['Easy', 'Medium', 'Hard'],
             newQuestion: {
                 category: 'Any',
                 correct_answer: '',
-                difficulty: '',
+                difficulty: 'Easy',
                 incorrect_answers: {
                 },
                 question: '',
@@ -98,10 +102,20 @@ class AvailableTestView extends React.Component {
             }
         })
     }
-    onSaveButtonClickHandler=()=>{
-        database.ref('/questions').push(
-           this.state.newQuestion
-        )
+
+
+    onSaveButtonClickHandler = (event) => {
+        if (this.state.newQuestion.category !== '' &&
+            this.state.newQuestion.correct_answer !== '' &&
+            this.state.newQuestion.question !==''&&
+            Object.values(this.state.newQuestion.incorrect_answers).map(answer=>answer!==0) ) {
+            
+            this.setState({ isFormFilledCorrectly: true })
+            database.ref('/questions').push(this.state.newQuestion)
+            this.setState({ open: true })
+        } else {
+            this.setState({ open: true })
+        }
     }
 
 
@@ -174,9 +188,15 @@ class AvailableTestView extends React.Component {
                 />
                 <Snackbar
                     open={this.state.open}
-                    message="Your question has been added to the database"
+                    style={style.snackbar}
+                    bodyStyle={style.snackbar}
+                    message={this.state.isFormFilledCorrectly ?
+                        "Your question has been added to our database" :
+                        "Your new question form has not been filled correctly"
+                    }
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
+
                 />
             </Paper>
         )

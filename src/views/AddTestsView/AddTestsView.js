@@ -22,6 +22,10 @@ const style = {
     },
     item: {
         float: "center"
+    },
+    snackbar:{
+        width:'100%',
+        maxWidth:'100%',
     }
 }
 
@@ -100,6 +104,7 @@ class AddTestView extends React.Component {
             })
         }
     }
+
     handleRequestClose = () => {
         this.setState({
             open: false,
@@ -219,9 +224,11 @@ class AddTestView extends React.Component {
 
                 <Snackbar
                     open={this.state.open}
+                    style={style.snackbar}
+                    bodyStyle={style.snackbar}
                     message={this.state.isFormFilledCorrectly ?
                         "Your test has been added to the database" :
-                        "Your test hasn't been filled in correctly"
+                        "Your test hasn't been filled correctly"
                     }
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
