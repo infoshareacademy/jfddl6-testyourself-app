@@ -24,7 +24,7 @@ const style = {
     }
 }
 
-class AvailableTestView extends React.Component {
+class AddQuestionView extends React.Component {
 
     constructor(props) {
         super(props)
@@ -202,4 +202,4 @@ class AvailableTestView extends React.Component {
         )
     }
 }
-export default AvailableTestView
+export default AddQuestionView
