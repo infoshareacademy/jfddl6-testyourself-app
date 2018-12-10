@@ -6,7 +6,7 @@ import FavoriteIconChecked from 'material-ui/svg-icons/action/favorite';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import placeholder from '../../images/atom.svg'
+import placeholder from '../../images/default.jpg'
 import Paper from 'material-ui/Paper'
 import { unifyString } from './utils'
 

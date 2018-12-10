@@ -2,7 +2,7 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { database } from '../../firebase'
-
+import placeholder from '../../images/default.jpg'
 const style = {
     paper: {
         margin: 20,
@@ -86,7 +86,7 @@ class TestView extends React.Component {
                 {/* <h3 style={style.text}>{`Description: `}</h3> */}
 
                 <img
-                    src={this.state.test.img}
+                    src={this.state.test.img || placeholder}
                     style={style.image}
                     alt=''
                 />
