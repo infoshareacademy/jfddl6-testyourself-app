@@ -20,6 +20,10 @@ class ListView extends React.Component {
     onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
+    onClickDeleteTestHandler = (test) => {
+        database.ref(`/tests/${test.id}`).remove()
+    }
+
     onFavoriteChangeHandler = (test) => {
         database.ref(`/tests/${test.id}`).update({
             favorite: !test.favorite
@@ -53,7 +57,7 @@ class ListView extends React.Component {
         this.loadData()
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         database.ref(`/tests`).off()
     }
 
@@ -77,6 +81,7 @@ class ListView extends React.Component {
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
                     categoryFilters={this.state.categoryFilters}
                     searchedNumberOfQuestionsInTest={this.state.searchedNumberOfQuestionsInTest}
+                    onClickDeleteTestHandler={this.onClickDeleteTestHandler}
                 />
             </div>
         )

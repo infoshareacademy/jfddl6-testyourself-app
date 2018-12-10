@@ -3,6 +3,7 @@ import React from 'react'
 import Avatar from 'material-ui/Avatar';
 import FavoriteIconUnchecked from 'material-ui/svg-icons/action/favorite-border';
 import FavoriteIconChecked from 'material-ui/svg-icons/action/favorite';
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
@@ -41,12 +42,13 @@ const MyList = (props) => (
                         props.searchedNumberOfQuestionsInTest <= Object.keys(test.questions).length
                     ))
                     .map(test => (
-                            <ListItem
-                                key={test.id}
-                                primaryText={test.description}
-                                leftAvatar={<Avatar src={test.img || placeholder} />}
-                                onClick={()=>props.onClickListItemHandler(test)}
-                                rightIconButton={
+                        <ListItem
+                            key={test.id}
+                            primaryText={test.description}
+                            leftAvatar={<Avatar src={test.img || placeholder} />}
+                            onClick={() => props.onClickListItemHandler(test)}
+                            rightIconButton={
+                                <div>
                                     <IconButton>
                                         {test.favorite ?
                                             <FavoriteIconChecked onClick={() => props.toggleFavorite(test)} />
@@ -54,8 +56,12 @@ const MyList = (props) => (
                                             <FavoriteIconUnchecked onClick={() => props.toggleFavorite(test)} />
                                         }
                                     </IconButton>
-                                }
-                            />
+                                    <IconButton>
+                                        <DeleteIcon onClick={() => props.onClickDeleteTestHandler(test)} />
+                                    </IconButton>
+                                </div>
+                            }
+                        />
                     ))
             }
         </List >
