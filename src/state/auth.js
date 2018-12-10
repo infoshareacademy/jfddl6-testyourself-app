@@ -25,7 +25,7 @@ export const signUpAsyncAction = () => (dispatch, getState) => {
                 // Handle Errors here.
                 let errorCode = error.code;
                 let errorMessage = error.message;
-                if (errorCode == 'auth/weak-password') {
+                if (errorCode === 'auth/weak-password') {
                     alert('The password is too weak.');
                 } else {
                     alert(errorMessage);
