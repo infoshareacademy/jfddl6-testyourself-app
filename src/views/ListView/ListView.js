@@ -53,7 +53,7 @@ class ListView extends React.Component {
         )
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.loadData()
     }
 
