@@ -17,17 +17,13 @@ export const loadDataAsyncAction = () => (dispatch, getState) => {
         snapshot => {
             if (!snapshot.val()) {
                 dispatch(loadData([]))
-                // this.setState({ tests: [] })
-                // return
             }
             const testsArray = Object.entries(snapshot.val())
             const testList = testsArray.map(([id, values]) => {
                 values.id = id
                 return values
             })
-            console.log(testList)
             dispatch(loadData(testList))
-            // this.setState({ tests: testList })
         }
     )
 }

@@ -30,7 +30,7 @@ class ListView extends React.Component {
         database.ref(`/tests/${test.id}`).update({
             favorite: !test.favorite
         })
-            this.props._loadDataAsyncAction()
+        this.props._loadDataAsyncAction()
     }
 
     onClickListItemHandler = (test) => {
@@ -38,7 +38,7 @@ class ListView extends React.Component {
     }
 
     componentDidMount() {
-        this.props._loadDataAsyncAction() 
+        this.props._loadDataAsyncAction()
     }
 
     componentWillUnmount() {
