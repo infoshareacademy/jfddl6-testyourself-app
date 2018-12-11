@@ -1,6 +1,6 @@
 import { database } from '../firebase'
 
-const SET_DATA = 'tests/SET_DATA'
+const SET_DATA = 'test/SET_DATA'
 
 const INITIAL_STATE = {
     tests: null
@@ -11,7 +11,6 @@ export const loadData = (data) => ({
     data
 })
 
-
 export const loadDataAsyncAction = () => (dispatch, getState) => {
     database.ref(`/tests`).on(
         'value',
@@ -19,15 +18,15 @@ export const loadDataAsyncAction = () => (dispatch, getState) => {
             if (!snapshot.val()) {
                 dispatch(loadData([]))
                 // this.setState({ tests: [] })
-                return
+                // return
             }
             const testsArray = Object.entries(snapshot.val())
             const testList = testsArray.map(([id, values]) => {
                 values.id = id
                 return values
             })
+            console.log(testList)
             dispatch(loadData(testList))
-
             // this.setState({ tests: testList })
         }
     )

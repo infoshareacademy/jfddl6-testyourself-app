@@ -4,11 +4,13 @@ import SearchView from './SearchView/SearchView'
 import MyList from './MyList'
 
 import { database } from '../../firebase'
+import { connect } from 'react-redux'
+
+import { loadDataAsyncAction } from '../../state/test'
 
 class ListView extends React.Component {
     state = {
         isFavoriteTest: false,
-        tests: null,
         searchText: '',
         searchedNumberOfQuestionsInTest: 3,
         maxSearchedNumberOfQuestionsInTest: 5,
@@ -28,33 +30,15 @@ class ListView extends React.Component {
         database.ref(`/tests/${test.id}`).update({
             favorite: !test.favorite
         })
-        this.loadData()
+            this.props._loadDataAsyncAction()
     }
 
     onClickListItemHandler = (test) => {
         this.props.history.push(`/test-view/${test.id}`)
     }
 
-    loadData = () => {
-        database.ref(`/tests`).on(
-            'value',
-            snapshot => {
-                if (!snapshot.val()) {
-                    this.setState({ tests: [] })
-                    return
-                }
-                const testsArray = Object.entries(snapshot.val())
-                const testList = testsArray.map(([id, values]) => {
-                    values.id = id
-                    return values
-                })
-                this.setState({ tests: testList })
-            }
-        )
-    }
-
     componentDidMount() {
-        this.loadData()
+        this.props._loadDataAsyncAction() 
     }
 
     componentWillUnmount() {
@@ -75,7 +59,7 @@ class ListView extends React.Component {
                 />
                 <MyList
                     searchText={this.state.searchText}
-                    tests={this.state.tests}
+                    tests={this.props._tests}
                     onClickListItemHandler={this.onClickListItemHandler}
                     toggleFavorite={this.onFavoriteChangeHandler}
                     chosenCategoryFilter={this.state.chosenCategoryFilter}
@@ -87,4 +71,13 @@ class ListView extends React.Component {
         )
     }
 }
-export default ListView
+
+const mapStateToProps = (state) => ({
+    _tests: state.test.tests
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    _loadDataAsyncAction: () => dispatch(loadDataAsyncAction())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListView)
