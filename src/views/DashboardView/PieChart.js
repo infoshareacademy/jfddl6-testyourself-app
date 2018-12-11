@@ -30,8 +30,6 @@ const data = [
     }
 ]
 
-
-
 const Chart = (props) => (
     <div>
         <PieChart width={

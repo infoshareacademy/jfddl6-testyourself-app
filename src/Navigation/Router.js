@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import AddFavouriteView from './../views/AddFavouriteView/AddFavouriteView'
 import AddTestsView from './../views/AddTestsView/AddTestsView'
-import AvailableTestsView from './../views/AvailableTestsView/AvailableTestsView'
+import AddQuestionView from './../views/AddQuestionsView/AddQuestionView'
 import FavouriteTestsListView from './../views/FavouriteTestsListView/FavouriteTestsListView'
 import ListView from './../views/ListView/ListView'
 import Navigation from './Navigation'
@@ -48,15 +48,21 @@ class Router extends React.Component {
                         <MenuItem
                             handleClose={this.handleClose}
                             to="/add-tests"
-                            text="Add tests"
+                            text="Compose test"
                         />
+                        <MenuItem
+                            handleClose={this.handleClose}
+                            to="/add-questions"
+                            text="Add questions"
+                        />
+
                     </Navigation>
                     <Route path="/" exact component={DashboardView} />
                     <Route path="/dashboard" component={DashboardView} />
                     <Route path="/list" component={ListView} />
                     <Route path="/favourite-tests-list" component={FavouriteTestsListView} />
                     <Route path="/add-tests" component={AddTestsView} />
-                    <Route path="/available-tests" component={AvailableTestsView} />
+                    <Route path="/add-questions" component={AddQuestionView} />
                     <Route path="/add-favourite" component={AddFavouriteView} />
                     <Route path="/test-view/:id" component={TestView} />
                 </div>

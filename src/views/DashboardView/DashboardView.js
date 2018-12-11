@@ -6,15 +6,12 @@ import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
 import BarChart from './BarChart'
 
-
 const style = {
     paper: {
         margin: 10,
         padding: 10
     }
 }
-
-
 
 class DashboardView extends React.Component {
     state = {
