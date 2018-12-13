@@ -15,15 +15,16 @@ const style = {
     }
 }
 
-const dbMessagesRef = database.ref('/tests')
+const dbMessagesRef = database.ref('/usersLogins')
 console.log(dbMessagesRef)
 
 
-class DashboardView extends React.Component {
+
+
     state = {
         viewportWidth: window.innerWidth,
-        tests: [],
-        newTests: ''
+        timeStamps: [],
+        
     }
 
     componentDidMount() {
@@ -34,10 +35,13 @@ class DashboardView extends React.Component {
 
         dbMessagesRef.on(
             'value',
-            snapshot => {
-                this.setState({
-                    tests: mapObjectToArray(snapshot.val())
+            snapshot => {console.log(snapshot.val())
+                const timeStampValueArray= Object.value
+                // this.setState({
+                //     timeStamps: mapObjectToArray(snapshot.val())
+this.setState({
 
+})
                 })
             }
         )
