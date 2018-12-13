@@ -8,6 +8,7 @@ import Subheader from 'material-ui/Subheader';
 import placeholder from '../../images/atom.svg'
 import Paper from 'material-ui/Paper'
 
+import { database } from '../../firebase'
 
 const style = {
     paper: {
@@ -17,39 +18,36 @@ const style = {
     link: {
         textDecoration: "none"
     }
-
 }
+
 class FavouriteTestsListView extends React.Component {
     state = {
         tests: []
     }
 
-    
     removeFromFavouriteListHandler = (test) => {
-        fetch(
-            `https://test-yourself-95f1a.firebaseio.com/tests/${test.id}.json`,
-            {
-                method: 'PATCH',
-                body: JSON.stringify({ favorite: !test.favorite })
-            }
-        ).then(() => { this.loadData() })
+       database.ref(`/tests/${test.id}`).update({
+            favorite: !test.favorite
+        })
+        this.loadData()
     }
 
     loadData = () => {
-        fetch(`https://test-yourself-95f1a.firebaseio.com/tests.json`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data) {
+        database.ref(`/tests`).on(
+            'value',
+            snapshot => {
+                if (!snapshot.val()) {
                     this.setState({ tests: [] })
                     return
                 }
-                const allTestsArray = Object.entries(data)
+                const allTestsArray = Object.entries(snapshot.val())
                 const testList = allTestsArray.map(([id, values]) => {
-                    values.id = id //nowa wlasciwosc id w obiekcie testy 
+                    values.id = id
                     return values
                 })
                 this.setState({ tests: testList })
-            })
+            }
+        )
     }
     onClickListItemHandler = (test) => {
         this.props.history.push(`/test-view/${test.id}`)
@@ -57,6 +55,10 @@ class FavouriteTestsListView extends React.Component {
 
     componentWillMount() {
         this.loadData()
+    }
+    
+    componentWillUnmount() {
+        database.ref('/tests').off()
     }
 
     render() {
