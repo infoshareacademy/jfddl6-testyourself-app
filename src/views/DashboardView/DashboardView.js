@@ -36,11 +36,8 @@ class DashboardView extends React.Component {
             'value',
             snapshot => {
                 console.log(snapshot.val())
-                const timeStampValueArray = Object.values(snapshot.val())
-                console.log(timeStampValueArray)
                 this.setState({
-                    timeStamps: mapObjectToArray(snapshot.val())
-
+                    tests: mapObjectToArray(snapshot.val())
                 })
             }
         )
