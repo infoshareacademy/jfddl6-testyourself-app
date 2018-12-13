@@ -1,20 +1,21 @@
 import React from 'react'
-import Paper from "material-ui/Paper"
 
+import Paper from "material-ui/Paper"
 import SelectField from "material-ui/SelectField"
 import RaisedButton from "material-ui/RaisedButton"
 import TextField from "material-ui/TextField"
 import MenuItem from "material-ui/MenuItem"
-import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+import { List, ListItem } from 'material-ui/List'
+import Subheader from 'material-ui/Subheader'
 import { unifyString } from '../ListView/utils'
-import Checkbox from 'material-ui/Checkbox';
-import Snackbar from 'material-ui/Snackbar';
+import Checkbox from 'material-ui/Checkbox'
+import Snackbar from 'material-ui/Snackbar'
 
+import { database } from '../../firebase'
 
 const style = {
     paper: {
-        margin: 6,
+        margin: 20,
         padding: 20
     },
     button: {
@@ -22,12 +23,14 @@ const style = {
     },
     item: {
         float: "center"
+    },
+    snackbar: {
+        width: '100%',
+        maxWidth: '100%',
     }
 }
 
-
 class AddTestView extends React.Component {
-
     constructor(props) {
         super(props)
 
@@ -44,7 +47,7 @@ class AddTestView extends React.Component {
             isFormFilledCorrectly: false,
             categoryFilters: ['Any', "Science: Computers", "Animals", "Geography", "Mythology"],
             createdTest: {
-                category: "",
+                category: "Any",
                 description: "",
                 favorite: false,
                 img: "",
@@ -54,31 +57,37 @@ class AddTestView extends React.Component {
     }
 
     loadData = () => {
-        fetch(`https://test-yourself-95f1a.firebaseio.com/questions.json`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data) {
+        database.ref(`/questions`).on(
+            'value',
+            snapshot => {
+                if (!snapshot.val()) {
                     this.setState({ questions: {} })
                     return
                 }
-                const questionsArray = Object.entries(data)
+                const questionsArray = Object.entries(snapshot.val())
                 const questionsList = questionsArray.map(([id, values]) => {
                     values.id = id
                     return values
                 })
                 this.setState({ questions: questionsList })
-            })
+            }
+        )
     }
+
     componentDidMount() {
         this.loadData()
     }
 
+    componentWillUnmount() {
+        database.ref('/questions').off()
+    }
+
     onSearchSelectFieldValueChangeHandler = (event, index, value) => {
         this.setState({
-            chosenCategoryFilter: parseInt(value, 10) - 1,
+            chosenCategoryFilter: value,
             createdTest: {
                 ...this.state.createdTest,
-                category: this.state.categoryFilters[this.state.chosenCategoryFilter + 1]
+                category: this.state.categoryFilters[value]
             }
         })
 
@@ -100,20 +109,17 @@ class AddTestView extends React.Component {
             })
         }
     }
+
     handleRequestClose = () => {
         this.setState({
             open: false,
         });
     };
 
-
-
     postToFirebase = () => {
-        fetch('https://test-yourself-95f1a.firebaseio.com/tests.json', {
-            method: 'POST',
-            body: JSON.stringify(this.state.createdTest)
-        })
+        database.ref(`/tests`).push(this.state.createdTest)
     }
+
     onTextInputChangeHandler = (event) => {
         this.setState({
             createdTest: {
@@ -130,7 +136,6 @@ class AddTestView extends React.Component {
             }
         })
     }
-
 
     onCheckBoxSelectionHandler = (id) => {
         const newQuestions = {
@@ -149,43 +154,34 @@ class AddTestView extends React.Component {
         return (
             <Paper
                 style={style.paper}>
-
-                <h2>
-                    Add Your own Test!
-                        </h2>
-
-
-
+                <h2> Compose your own test  </h2>
                 <TextField
-                    floatingLabelText="Name Your Test"
+                    floatingLabelText="Name your test"
                     fullWidth={true}
                     onChange={this.onTextInputChangeHandler}
                 />
 
                 <SelectField
                     floatingLabelText="Categories"
-                    value={this.state.chosenCategoryFilter + 1}
+                    value={this.state.chosenCategoryFilter}
                     onChange={this.onSearchSelectFieldValueChangeHandler}
                 >
                     {this.state.categoryFilters.map((filter, index) => (
                         <MenuItem
                             key={index}
-                            value={index + 1}
+                            value={index}
                             primaryText={filter}
                         />
                     ))}
-
                 </SelectField>
 
-
                 <TextField
-                    floatingLabelText="IMAGE"
+                    floatingLabelText="Image"
                     fullWidth={true}
                     onChange={this.onTextUrlInputChangeHandler}
                 />
 
                 <List>
-
                     < Subheader > Available Questions</Subheader>
                     {
                         this.state.questions &&
@@ -207,8 +203,6 @@ class AddTestView extends React.Component {
                     }
                 </List >
 
-
-
                 <RaisedButton
                     label="Save"
                     primary={true}
@@ -219,15 +213,15 @@ class AddTestView extends React.Component {
 
                 <Snackbar
                     open={this.state.open}
+                    style={style.snackbar}
+                    bodyStyle={style.snackbar}
                     message={this.state.isFormFilledCorrectly ?
                         "Your test has been added to the database" :
-                        "Your test hasn't been filled in correctly"
+                        "Your test has not been filled correctly !"
                     }
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
-
                 />
-
             </Paper>
         )
     }
