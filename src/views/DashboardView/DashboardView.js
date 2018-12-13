@@ -15,12 +15,11 @@ const style = {
     }
 }
 
-const dbMessagesRef = database.ref('/usersLogins')
+const dbMessagesRef = database.ref('/tests')
 console.log(dbMessagesRef)
 
 
-
-
+class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
         timeStamps: [],
@@ -35,13 +34,10 @@ console.log(dbMessagesRef)
 
         dbMessagesRef.on(
             'value',
-            snapshot => {console.log(snapshot.val())
-                const timeStampValueArray= Object.value
-                // this.setState({
-                //     timeStamps: mapObjectToArray(snapshot.val())
-this.setState({
+            snapshot => {
+                this.setState({
+                    timeStamps: mapObjectToArray(snapshot.val())
 
-})
                 })
             }
         )
@@ -121,3 +117,20 @@ this.setState({
 }
 
 export default DashboardView
+
+
+
+
+
+
+
+
+
+
+dbMessagesRef.on(
+    'value',
+    snapshot => {console.log(snapshot.val())
+        const timeStampValueArray= Object.value
+        // this.setState({
+        //     timeStamps: mapObjectToArray(snapshot.val())
+this.setState({
