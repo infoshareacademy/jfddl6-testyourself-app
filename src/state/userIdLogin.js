@@ -23,23 +23,12 @@ export const stopSyncingUsersTestFromDbAsyncAction = () => (dispatch, getState) 
     database.ref(`/users/${uuid}/test`).off()
 }
 
-export const addTestToDb = (key, meal) => (dispatch, getState) => {
-    const uuid = getState().auth.user.uid
-
-    database.ref(`/users/${uuid}/test/${test}/${key}`).set(true)
-}
-
 export const addTestToDb = (key, test) => (dispatch, getState) => {
     const uuid = getState().auth.user.uid
 
     database.ref(`/users/${uuid}/test/${test}/${key}`).set(true)
 }
 
-export const addTestToDb = (key, test) => (dispatch, getState) => {
-    const uuid = getState().auth.user.uid
-
-    database.ref(`/users/${uuid}/test/${test}/${key}`).set(true)
-}
 
 export const deleteTestFromDb = (key, test) => (dispatch, getState) => {
     const uuid = getState().auth.user.uid
@@ -47,17 +36,7 @@ export const deleteTestFromDb = (key, test) => (dispatch, getState) => {
     database.ref(`/users/${uuid}/test/${test}/${key}`).set(null)
 }
 
-export const deleteTestFromDb = (key, test) => (dispatch, getState) => {
-    const uuid = getState().auth.user.uid
 
-    database.ref(`/users/${uuid}/test/${test}/${key}`).set(null)
-}
-
-export const deleteTestFromDb = (key, test) => (dispatch, getState) => {
-    const uuid = getState().auth.user.uid
-
-    database.ref(`/users/${uuid}/test/${test}/${key}`).set(null)
-}
 
 const setDataAction = data => ({
     type: SET_DATA,
