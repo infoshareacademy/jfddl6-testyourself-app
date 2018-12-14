@@ -1,6 +1,6 @@
 import { database } from '../firebase'
 
-const SET_DATA = 'usersTest/SET_DATA'
+const SET_DATA = 'usersIdLogin/SET_DATA'
 
 const INITIAL_STATE = {
     test: []
