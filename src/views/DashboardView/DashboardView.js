@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
 import BarChart from './BarChart'
+import {database} from '../../firebase'
 
 const style = {
     paper: {
@@ -19,6 +20,14 @@ class DashboardView extends React.Component {
     }
 
     componentDidMount() {
+        database.ref(`/usersLogins/loginsLogs`).on(
+            'value',
+            snapshot=>{
+                console.log(snapshot.val())
+                console.log('logs',Object.values(snapshot.val()))}
+        )
+           
+
         window.addEventListener(
             'resize',
             this.resizeListener

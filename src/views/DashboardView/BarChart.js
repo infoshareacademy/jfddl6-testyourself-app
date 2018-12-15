@@ -16,11 +16,18 @@ const data = [
     },
     {
         time: "IV Q",
-        users: 145,
+        users: 280,
     }
 ]
+
+
+
+
 const Chart = (props) => (
+
+
     <div>
+
         <BarChart
             width={props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5

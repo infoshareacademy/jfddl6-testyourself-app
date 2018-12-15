@@ -3,7 +3,7 @@ import React from 'react'
 import SearchView from './SearchView/SearchView'
 import MyList from './MyList'
 
-import { database } from '../../firebase'
+import { auth,database } from '../../firebase'
 import { connect } from 'react-redux'
 
 import { loadDataAsyncAction } from '../../state/test'
@@ -23,11 +23,11 @@ class ListView extends React.Component {
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
     onClickDeleteTestHandler = (test) => {
-        database.ref(`/tests/${test.id}`).remove()
+        database.ref(`/users/${auth.currentUser.uid}/tests/${test.id}`).remove()
     }
 
     onFavoriteChangeHandler = (test) => {
-        database.ref(`/tests/${test.id}`).update({
+        database.ref(`/users/${auth.currentUser.uid}/tests/${test.id}`).update({
             favorite: !test.favorite
         })
         this.props._loadDataAsyncAction()
@@ -42,7 +42,7 @@ class ListView extends React.Component {
     }
 
     componentWillUnmount() {
-        database.ref(`/tests`).off()
+        database.ref(`/users/${auth.currentUser.uid}/tests`).off()
     }
 
     render() {
