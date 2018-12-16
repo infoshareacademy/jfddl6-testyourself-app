@@ -1,8 +1,8 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
-import { database } from '../../firebase'
-// import placeholder from '../../images/default.jpg'
+import {auth, database } from '../../firebase'
+import placeholder from '../../images/default.jpg'
 const style = {
     paper: {
         margin: 20,
@@ -42,31 +42,32 @@ class TestView extends React.Component {
     }
 
     componentDidMount() {
-        database.ref(`/tests/${this.state.id}`).on(
+        database.ref(`/users/${auth.currentUser.uid}/tests/${this.state.id}`).on(
             'value',
             snapshot => {
                 this.setState({ test: snapshot.val() })
                 this.setState({ testArray: Object.values(this.state.test) })
                 this.setState({ numOfQuestions: Object.values(this.state.testArray[4]).length })
-                return this.setState({ favorite: snapshot.val().favorite })
+                this.setState({ favorite: snapshot.val().favorite })
+
             }
         )
     }
 
     componentWillUnmount() {
-        database.ref(`/tests/${this.state.id}`).off()
+        database.ref(`/users/${auth.currentUser.uid}/tests/${this.state.id}`).off()
     }
 
     onClickHandler = () => {
         if (this.state.favorite === false) {
             this.setState({ favorite: true })
-            database.ref(`/tests/${this.state.id}/favorite`).set(
+            database.ref(`/users/${auth.currentUser.uid}/tests/${this.state.id}/favorite`).set(
                 true
             )
         }
         else {
             this.setState({ favorite: false })
-            database.ref(`/tests/${this.state.id}/favorite`).set(
+            database.ref(`/users/${auth.currentUser.uid}/tests/${this.state.id}/favorite`).set(
                 false
             )
         }
@@ -83,10 +84,11 @@ class TestView extends React.Component {
                 <h3 style={style.text}>{`Category: ${this.state.test.category}`}</h3>
                 <h3 style={style.text}>{`Number of questions: ${this.state.numOfQuestions}`}</h3>
                 {/* <h3 style={style.text}>{`Difficulty: `}</h3> */}
-                {/* <h3 style={style.text}>{`Description: `}</h3> */}
+                
 
                 <img
-                    src={this.state.test.img }
+                    
+                    src={this.state.test.img==='' ? placeholder: this.state.test.img}
                     style={style.image}
                     alt=''
                 />

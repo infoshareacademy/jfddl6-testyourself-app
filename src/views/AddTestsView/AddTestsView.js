@@ -11,8 +11,8 @@ import { unifyString } from '../ListView/utils'
 import Checkbox from 'material-ui/Checkbox'
 import Snackbar from 'material-ui/Snackbar'
 
-import { database } from '../../firebase'
-
+import { auth,database } from '../../firebase'
+ 
 const style = {
     paper: {
         margin: 20,
@@ -35,6 +35,7 @@ class AddTestView extends React.Component {
         super(props)
 
         this.state = {
+            currentUserId: null,
             value: "",
             category: "",
             difficulty: "",
@@ -55,7 +56,7 @@ class AddTestView extends React.Component {
             }
         }
     }
-
+    
     loadData = () => {
         database.ref(`/questions`).on(
             'value',
@@ -75,6 +76,8 @@ class AddTestView extends React.Component {
     }
 
     componentDidMount() {
+        const userId = auth.currentUser.uid
+        this.setState({currentUserId: userId})
         this.loadData()
     }
 
@@ -90,24 +93,21 @@ class AddTestView extends React.Component {
                 category: this.state.categoryFilters[value]
             }
         })
-
     }
+
 
     onClickSaveHandler = (event) => {
         if (this.state.createdTest.category !== '' &&
             this.state.createdTest.description !== '' &&
-            Object.keys(this.state.createdTest.questions).length !== 0
-        ) {
-            this.setState({ isFormFilledCorrectly: true })
+            Object.keys(this.state.createdTest.questions).length !== 0 )
+        
+            {this.setState({ isFormFilledCorrectly: true })
             this.postToFirebase()
             this.setState({
                 open: true
             })
-        } else {
-            this.setState({
-                open: true
-            })
-        }
+         }
+        
     }
 
     handleRequestClose = () => {
@@ -117,7 +117,7 @@ class AddTestView extends React.Component {
     };
 
     postToFirebase = () => {
-        database.ref(`/tests`).push(this.state.createdTest)
+        database.ref(`/users/${this.state.currentUserId}/tests`).push(this.state.createdTest)
     }
 
     onTextInputChangeHandler = (event) => {
