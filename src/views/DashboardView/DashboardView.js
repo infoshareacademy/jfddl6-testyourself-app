@@ -16,23 +16,38 @@ const style = {
 
 class DashboardView extends React.Component {
     state = {
-        viewportWidth: window.innerWidth
+        viewportWidth: window.innerWidth,
+        dataTimeStamps:''
     }
 
     componentDidMount() {
         database.ref(`/usersLogins/loginsLogs`).on(
             'value',
             snapshot=>{
-                console.log(snapshot.val())
-                console.log('logs',Object.values(snapshot.val()))}
+                this.setState({dataTimeStamps:Object.values(snapshot.val()).map(el=>Object.values(el)[0])})
+               console.log(this.state.dataTimeStamps)
+           }
         )
-           
-
+       
+        this.todayMidnightTimeStamp()
         window.addEventListener(
             'resize',
             this.resizeListener
         )
     }
+
+    
+
+    todayMidnightTimeStamp=()=>{
+        const now = new Date()
+        const todayMidnightTimestmap = now.getTime()
+        - now.getHours() * 60 * 60 * 1000
+        - now.getMinutes() * 60 * 1000
+        - now.getSeconds() * 1000
+        - now.getMilliseconds()
+        console.log(todayMidnightTimestmap)
+    }
+    
 
     resizeListener = () => {
         console.log(window.innerWidth)
