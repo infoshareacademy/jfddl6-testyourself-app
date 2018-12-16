@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Link } from 'react-router-dom'
 import PieChart from './PieChart'
 import BarChart from './BarChart'
+import { database } from '../../firebase'
 
 const style = {
     paper: {
@@ -15,10 +16,17 @@ const style = {
 
 class DashboardView extends React.Component {
     state = {
-        viewportWidth: window.innerWidth
+        viewportWidth: window.innerWidth,
+        dataTimeStamps: ''
     }
 
     componentDidMount() {
+        database.ref(`/usersLogins/loginsLogs`).on(
+            'value',
+            snapshot => {
+                this.setState({ dataTimeStamps: Object.values(snapshot.val()).map(el => Object.values(el)[0]) })
+            }
+        )
         window.addEventListener(
             'resize',
             this.resizeListener
@@ -31,7 +39,6 @@ class DashboardView extends React.Component {
             viewportWidth: window.innerWidth
         })
     }
-
 
     render() {
         return (
@@ -91,4 +98,4 @@ class DashboardView extends React.Component {
     }
 }
 
-    export default DashboardView
+export default DashboardView

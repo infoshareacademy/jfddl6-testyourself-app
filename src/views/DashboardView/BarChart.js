@@ -3,24 +3,43 @@ import { BarChart, Tooltip, Legend, CartesianGrid, XAxis, YAxis, Bar } from 'rec
 
 const data = [
     {
-        time: "I Q",
+        time: "Today",
         users: 50,
     },
     {
-        time: "II Q",
+        time: "Yesterday",
         users: 27,
     },
     {
-        time: "III Q",
+        time: "2 days ago",
         users: 89,
     },
     {
-        time: "IV Q",
-        users: 145,
+        time: "3 days ago",
+        users: 280,
+    },
+    {
+        time: "4 days ago",
+        users: 280,
+    },
+    {
+        time: "5 days ago",
+        users: 280,
+    },
+    {
+        time: "6 days ago",
+        users: 280,
     }
 ]
+
+
+
+
 const Chart = (props) => (
+
+
     <div>
+
         <BarChart
             width={props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5

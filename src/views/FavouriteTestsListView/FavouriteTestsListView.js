@@ -5,10 +5,10 @@ import FavoriteIconChecked from 'material-ui/svg-icons/action/favorite';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import placeholder from '../../images/atom.svg'
+import placeholder from '../../images/default.jpg'
 import Paper from 'material-ui/Paper'
 
-import { database } from '../../firebase'
+import {auth,database } from '../../firebase'
 
 const style = {
     paper: {
@@ -26,14 +26,14 @@ class FavouriteTestsListView extends React.Component {
     }
 
     removeFromFavouriteListHandler = (test) => {
-       database.ref(`/tests/${test.id}`).update({
+        database.ref(`/users/${auth.currentUser.uid}/tests/${test.id}`).update({
             favorite: !test.favorite
         })
         this.loadData()
     }
 
     loadData = () => {
-        database.ref(`/tests`).on(
+        database.ref(`/users/${auth.currentUser.uid}/tests`).on(
             'value',
             snapshot => {
                 if (!snapshot.val()) {
@@ -49,6 +49,7 @@ class FavouriteTestsListView extends React.Component {
             }
         )
     }
+
     onClickListItemHandler = (test) => {
         this.props.history.push(`/test-view/${test.id}`)
     }
@@ -58,7 +59,7 @@ class FavouriteTestsListView extends React.Component {
     }
     
     componentWillUnmount() {
-        database.ref('/tests').off()
+        database.ref(`/users/${auth.currentUser.uid}/tests`).off()
     }
 
     render() {
