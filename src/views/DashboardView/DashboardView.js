@@ -135,6 +135,7 @@ class DashboardView extends React.Component {
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
                                 <PieChart
+                                    // pieChartData={pieData}
                                     viewportWidth={this.state.viewportWidth}
                                 />
                             </Row>
@@ -152,7 +153,6 @@ class DashboardView extends React.Component {
             </Paper>
         )
     }
-
     componentWillUnmount() {
         window.removeEventListener(
             'resize',
