@@ -21,6 +21,11 @@ const data = [
 ]
 const Chart = (props) => (
     <div>
+        <h3
+            style={{ textAlign: 'center' }}
+        >
+            Users logins
+    </h3>
         <BarChart
             width={props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5

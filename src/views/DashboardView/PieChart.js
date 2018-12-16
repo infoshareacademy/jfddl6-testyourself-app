@@ -32,11 +32,11 @@ const pieChartData = [
 
 const Chart = (props) => (
     <div>
-        <h2
+        <h3
             style={{ textAlign: 'center' }}
         >
             Tests categories
-    </h2>
+    </h3>
         <PieChart width={
             props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5
@@ -53,4 +53,5 @@ const Chart = (props) => (
     </div>
 );
 export default Chart
+
 
