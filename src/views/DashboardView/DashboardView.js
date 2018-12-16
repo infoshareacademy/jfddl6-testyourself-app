@@ -48,6 +48,25 @@ class DashboardView extends React.Component {
                 this.setState({ tests: testList })
             }
         )
+        database.ref(`/usersLogins`).on(
+            'value',
+            snapshot => {
+                if (!snapshot.val()) {
+                    this.setState({ loginsLog: [] })
+                    return
+                }
+                const allLoginsArray = Object.entries(snapshot.val())
+                const loginsData = allLoginsArray.map(([id, values]) => {
+                    values.id = id
+                    return values
+
+                })
+                console.log(loginsData)
+                //const timestamp=
+                this.setState({ logins: loginsData })
+            }
+        )
+
     }
 
 
@@ -60,6 +79,45 @@ class DashboardView extends React.Component {
 
 
     render() {
+        const now = new Date()
+        const todayMidnightTimestamp = now.getTime()
+            - now.getHours() * 60 * 60 * 1000
+            - now.getMinutes() * 60 * 1000
+            - now.getSeconds() * 1000
+            - now.getMilliseconds()
+
+        const loginsData = this.props.loginsData && this.props.loginsData.map(timestamp => timestamp.timestamp)
+
+        const midnightTimestamp = {
+            day0: todayMidnightTimestamp,
+            day1: todayMidnightTimestamp - 24 * 60 * 60 * 1000,
+            day2: todayMidnightTimestamp - 2 * 24 * 60 * 60 * 1000,
+            day3: todayMidnightTimestamp - 3 * 24 * 60 * 60 * 1000,
+            day4: todayMidnightTimestamp - 4 * 24 * 60 * 60 * 1000,
+            day5: todayMidnightTimestamp - 5 * 24 * 60 * 60 * 1000,
+            day6: todayMidnightTimestamp - 6 * 24 * 60 * 60 * 1000
+        }
+
+        const loginsPerDay = {
+            day0: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day0).length,
+            day1: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day1 && timestamp < midnightTimestamp.day0).length,
+            day2: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day2 && timestamp < midnightTimestamp.day1).length,
+            day3: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day3 && timestamp < midnightTimestamp.day2).length,
+            day4: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day4 && timestamp < midnightTimestamp.day3).length,
+            day5: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day5 && timestamp < midnightTimestamp.day4).length,
+            day6: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day6 && timestamp < midnightTimestamp.day5).length
+        }
+
+        const barData = Object.values(loginsPerDay).map((loginsNumber, index) => ({
+            day: 0 - index,
+            users: loginsNumber,
+            fill: "grey",
+            label: false
+        }))
+
+
+
+
         // const testsData = this.props.testList
         // const numberOfTestsScienceComp = testsData.filter(e => e.category === 'Science Computers').length
         // console.log(numberOfTestsScienceComp)
@@ -132,7 +190,7 @@ class DashboardView extends React.Component {
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
                                 <BarChart
-                                    // barChartData={barData}
+                                    barChartData={barData}
                                     viewportWidth={this.state.viewportWidth}
                                 />
                             </Row>
