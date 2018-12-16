@@ -13,8 +13,6 @@ const style = {
         padding: 10
     }
 }
-
-
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
@@ -26,21 +24,15 @@ class DashboardView extends React.Component {
             'value',
             snapshot => {
                 this.setState({ dataTimeStamps: Object.values(snapshot.val()).map(el => Object.values(el)[0]) })
-                // console.log(this.state.dataTimeStamps)
             }
         )
         window.addEventListener(
             'resize',
             this.resizeListener
-
         )
-
-        this.numberOfUsersPerDay()
     }
 
     getDay = () => {
-        console.log('dataaaa', this.state.dataTimeStamps)
-
         const todaysMidnight = this.todayMidnightTimeStamp()
         return {
             day0: todaysMidnight,
@@ -54,23 +46,16 @@ class DashboardView extends React.Component {
     }
 
     numberOfUsersPerDay = () => {
-        console.log('day0', this.getDay().day0)
-        console.log('data', this.state.dataTimeStamps)
-        // console.log('aaa',this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay(this.todayMidnightTimeStamp()).day0))
-
-
-        // return {
-        //     day0: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day0).length,
-
-        //     day1: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day1 && timestamp < midnightTimestamp.day0).length,
-        //     day2: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day2 && timestamp < midnightTimestamp.day1).length,
-        //     day3: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day3 && timestamp < midnightTimestamp.day2).length,
-        //     day4: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day4 && timestamp < midnightTimestamp.day3).length,
-        //     day5: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day5 && timestamp < midnightTimestamp.day4).length,
-        //     day6: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day6 && timestamp < midnightTimestamp.day5).length
-        // }
+        return {
+            day0: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day0).length,
+            day1: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day1 && timestamp < this.getDay().day0).length,
+            day2: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day2 && timestamp < this.getDay().day1).length,
+            day3: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day3 && timestamp < this.getDay().day2).length,
+            day4: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day4 && timestamp < this.getDay().day3).length,
+            day5: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day5 && timestamp < this.getDay().day4).length,
+            day6: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day6 && timestamp < this.getDay().day5).length
+        }
     }
-
 
     todayMidnightTimeStamp = () => {
         const now = new Date()
@@ -79,19 +64,46 @@ class DashboardView extends React.Component {
             - now.getMinutes() * 60 * 1000
             - now.getSeconds() * 1000
             - now.getMilliseconds()
-        // console.log(todayMidnightTimestmap)
     }
 
-
     resizeListener = () => {
-        // console.log(window.innerWidth)
         this.setState({
             viewportWidth: window.innerWidth
         })
     }
 
     render() {
-        console.log('dupa',this.state.dataTimeStamps)
+
+        const data = [
+            {
+                time: "Today",
+                users: this.numberOfUsersPerDay().day0,
+            },
+            {
+                time: "Yesterday",
+                users: this.numberOfUsersPerDay().day1,
+            },
+            {
+                time: "2 days ago",
+                users: this.numberOfUsersPerDay().day2,
+            },
+            {
+                time: "3 days ago",
+                users: this.numberOfUsersPerDay().day3,
+            },
+            {
+                time: "4 days ago",
+                users: this.numberOfUsersPerDay().day4,
+            },
+            {
+                time: "5 days ago",
+                users: this.numberOfUsersPerDay().day5,
+            },
+            {
+                time: "6 days ago",
+                users: this.numberOfUsersPerDay().day6,
+            }
+        ]
         return (
             <Paper
                 style={style.paper}>
@@ -130,6 +142,7 @@ class DashboardView extends React.Component {
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
                                 <BarChart
+                                    data={data}
                                     viewportWidth={this.state.viewportWidth}
                                 />
                             </Row>
@@ -137,7 +150,6 @@ class DashboardView extends React.Component {
                     </Row>
                 </Grid>
             </Paper>
-
         )
     }
 
