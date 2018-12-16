@@ -1,6 +1,7 @@
 import React from 'react'
 import { BarChart, Tooltip, Legend, CartesianGrid, XAxis, YAxis, Bar } from 'recharts'
 
+
 const data = [
     {
         time: "Today",

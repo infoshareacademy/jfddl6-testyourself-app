@@ -14,52 +14,84 @@ const style = {
     }
 }
 
+
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
-        dataTimeStamps: ''
+        dataTimeStamps: []
     }
 
     componentDidMount() {
-        database.ref(`/usersLogins/loginsLogs`).on(
+        database.ref(`/usersLogins/loginsLogs`).once(
             'value',
             snapshot => {
                 this.setState({ dataTimeStamps: Object.values(snapshot.val()).map(el => Object.values(el)[0]) })
-                console.log(this.state.dataTimeStamps)
+                // console.log(this.state.dataTimeStamps)
             }
         )
-        this.todayMidnightTimeStamp()
         window.addEventListener(
             'resize',
             this.resizeListener
+
         )
+
+        this.numberOfUsersPerDay()
     }
 
-    oneDay=()=>{
-        
+    getDay = () => {
+        console.log('dataaaa', this.state.dataTimeStamps)
+
+        const todaysMidnight = this.todayMidnightTimeStamp()
+        return {
+            day0: todaysMidnight,
+            day1: todaysMidnight - 24 * 60 * 60 * 1000,
+            day2: todaysMidnight - 2 * 24 * 60 * 60 * 1000,
+            day3: todaysMidnight - 3 * 24 * 60 * 60 * 1000,
+            day4: todaysMidnight - 4 * 24 * 60 * 60 * 1000,
+            day5: todaysMidnight - 5 * 24 * 60 * 60 * 1000,
+            day6: todaysMidnight - 6 * 24 * 60 * 60 * 1000
+        }
     }
 
-    todayMidnightTimeStamp=()=>{
+    numberOfUsersPerDay = () => {
+        console.log('day0', this.getDay().day0)
+        console.log('data', this.state.dataTimeStamps)
+        // console.log('aaa',this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay(this.todayMidnightTimeStamp()).day0))
+
+
+        // return {
+        //     day0: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= this.getDay().day0).length,
+
+        //     day1: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day1 && timestamp < midnightTimestamp.day0).length,
+        //     day2: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day2 && timestamp < midnightTimestamp.day1).length,
+        //     day3: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day3 && timestamp < midnightTimestamp.day2).length,
+        //     day4: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day4 && timestamp < midnightTimestamp.day3).length,
+        //     day5: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day5 && timestamp < midnightTimestamp.day4).length,
+        //     day6: this.state.dataTimeStamps && this.state.dataTimeStamps.filter(timestamp => timestamp >= midnightTimestamp.day6 && timestamp < midnightTimestamp.day5).length
+        // }
+    }
+
+
+    todayMidnightTimeStamp = () => {
         const now = new Date()
-        const todayMidnightTimestmap = now.getTime()
-        - now.getHours() * 60 * 60 * 1000
-        - now.getMinutes() * 60 * 1000
-        - now.getSeconds() * 1000
-        - now.getMilliseconds()
-        console.log(todayMidnightTimestmap)
+        return now.getTime()
+            - now.getHours() * 60 * 60 * 1000
+            - now.getMinutes() * 60 * 1000
+            - now.getSeconds() * 1000
+            - now.getMilliseconds()
+        // console.log(todayMidnightTimestmap)
     }
-    
-
 
 
     resizeListener = () => {
-        console.log(window.innerWidth)
+        // console.log(window.innerWidth)
         this.setState({
             viewportWidth: window.innerWidth
         })
     }
 
     render() {
+        console.log('dupa',this.state.dataTimeStamps)
         return (
             <Paper
                 style={style.paper}>
