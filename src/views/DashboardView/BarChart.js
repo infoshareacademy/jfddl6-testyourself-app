@@ -1,23 +1,28 @@
 import React from 'react'
 import { BarChart, Tooltip, Legend, CartesianGrid, XAxis, YAxis, Bar } from 'recharts'
-import { randomColor } from './utils'
 
 const Chart = (props) => (
     <div>
+        <h3
+            style={{ textAlign: 'center' }}
+        >
+            Number of users per day
+        </h3>
         <BarChart
             width={props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5
                 :
                 props.viewportWidth / 2.5
             }
-           
-            height={300} data={props.data}> Number of users logged in 
+
+            height={300} data={props.data}>
+
             <XAxis dataKey="time" stroke="#8884d8" />
             <YAxis />
             <Tooltip wrapperStyle={{ width: 100, backgroundColor: '#ccc' }} />
             <Legend width={100} wrapperStyle={{ top: 40, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} />
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <Bar type="monotone" dataKey="users" fill={randomColor()} />
+            <Bar type="monotone" dataKey="users" fill='purple' />
         </BarChart>
     </div>
 );

@@ -16,7 +16,7 @@ const style = {
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
-        dataTimeStamps: []
+        dataTimeStamps: [],
     }
 
     componentDidMount() {
@@ -74,7 +74,7 @@ class DashboardView extends React.Component {
 
     render() {
 
-        const data = [
+        const barChartData = [
             {
                 time: "Today",
                 users: this.numberOfUsersPerDay().day0,
@@ -143,7 +143,7 @@ class DashboardView extends React.Component {
                         <Col lg={6}>
                             <Row middle="xs" center='xs'>
                                 <BarChart
-                                    data={data}
+                                    data={barChartData}
                                     viewportWidth={this.state.viewportWidth}
                                 />
                             </Row>

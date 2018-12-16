@@ -53,7 +53,7 @@ class Chart extends React.Component {
                 <h3
                     style={{ textAlign: 'center' }}
                 >
-                    Tests categories
+                    Questions categories
                </h3>
                 <PieChart width={
                     this.props.viewportWidth <= 992 ?
