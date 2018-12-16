@@ -43,8 +43,7 @@ class DashboardView extends React.Component {
                     return values
 
                 })
-                const numberOfTestsScienceComp = testList.filter(e => e.category === 'Science Computers').length
-        console.log(numberOfTestsScienceComp)
+                
                 this.setState({ tests: testList })
             }
         )
@@ -61,7 +60,7 @@ class DashboardView extends React.Component {
                     return values
 
                 })
-                console.log(loginsData)
+                // console.log(loginsData)
                 //const timestamp=
                 this.setState({ logins: loginsData })
             }
