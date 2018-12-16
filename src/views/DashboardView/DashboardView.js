@@ -18,14 +18,16 @@ const style = {
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth,
-        numberOfTestsScienceComp: '',
-        numberOfTestsGeography: '',
-        numberOfTestsMythology: '',
-        numbersOfTestsAnimals: '',
-        testList: ''
+        dataTimeStamps: ''
     }
 
     componentDidMount() {
+        database.ref(`/usersLogins/loginsLogs`).on(
+            'value',
+            snapshot => {
+                this.setState({ dataTimeStamps: Object.values(snapshot.val()).map(el => Object.values(el)[0]) })
+            }
+        )
         window.addEventListener(
             'resize',
             this.resizeListener
@@ -75,7 +77,6 @@ class DashboardView extends React.Component {
             viewportWidth: window.innerWidth
         })
     }
-
 
     render() {
         const now = new Date()
@@ -210,9 +211,3 @@ class DashboardView extends React.Component {
 }
 
 export default DashboardView
-
-
-
-
-
-

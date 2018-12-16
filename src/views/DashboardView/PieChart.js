@@ -4,34 +4,6 @@ import { PieChart, Pie, Tooltip } from "recharts"
 import { database } from '../../firebase'
 import mapObjectToArray, { randomColor } from './utils';
 
-const pieChartData = [
-    {
-        value: 25,
-        name: 'Science Computers',
-        fill: 'blue'
-    },
-    {
-        value: 20,
-        name: 'Animals',
-        fill: 'red'
-    },
-    {
-        value: 15,
-        name: 'Geography',
-        fill: 'purple'
-    },
-    {
-        value: 35,
-        name: 'Mythology',
-        fill: 'green'
-    },
-    {
-        value: 15,
-        name: 'New-added test',
-        fill: 'yellow'
-    }
-]
-
 class Chart extends React.Component {
 
     state = {
