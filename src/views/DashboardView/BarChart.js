@@ -39,7 +39,6 @@ const Chart = (props) => (
 
 
     <div>
-
         <BarChart
             width={props.viewportWidth <= 992 ?
                 props.viewportWidth / 1.5
