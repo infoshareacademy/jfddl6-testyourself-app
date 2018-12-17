@@ -32,14 +32,11 @@ class SearchView extends React.Component {
 
 
                 <Row>
-                    {/* <Col xs={12} sm={3} md={2} lg={1} >
-                        <h1>
-                            {this.props.numberOfAnswers || 0}
-                        </h1>
-                    </Col> */}
+
                     <Col xs={12} sm={9} md={10} lg={11} >
                         <Slider
                             step={1}
+                            min={1}
                             max={this.props.maxSearchedNumberOfQuestionsInTest}
                             value={this.props.searchedNumberOfQuestionsInTest}
                             onChange={this.props.onSearchSliderValueChangeHandler}
@@ -48,7 +45,7 @@ class SearchView extends React.Component {
                     </Col>
                     <Col xs={12} sm={3} md={2} lg={1} >
                         <h1>
-                            {this.props.searchedNumberOfQuestionsInTest || 0}
+                            {this.props.searchedNumberOfQuestionsInTest || this.props.maxSearchedNumberOfQuestionsInTest}
                         </h1>
                     </Col>
 
