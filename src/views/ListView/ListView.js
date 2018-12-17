@@ -3,7 +3,7 @@ import React from 'react'
 import SearchView from './SearchView/SearchView'
 import MyList from './MyList'
 
-import { auth,database } from '../../firebase'
+import { auth, database } from '../../firebase'
 import { connect } from 'react-redux'
 
 import { loadDataAsyncAction } from '../../state/test'
@@ -19,7 +19,12 @@ class ListView extends React.Component {
     }
 
     onSearchTextChangeHandler = (event) => { this.setState({ searchText: event.target.value }) }
-    onSearchSliderValueChangeHandler = (event, value) => { this.setState({ searchedNumberOfQuestionsInTest: value }) }
+    onSearchSliderValueChangeHandler = (event, value) => {
+        if (value <= 1) value = 1
+        this.setState({
+            searchedNumberOfQuestionsInTest: value
+        })
+    }
     onSearchSelectFieldValueChangeHandler = (event, index, value) => { this.setState({ chosenCategoryFilter: parseInt(value, 10) - 1 }) }
 
     onClickDeleteTestHandler = (test) => {
