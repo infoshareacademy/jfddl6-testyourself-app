@@ -1,4 +1,4 @@
-The application can be fount on [click](http://app.test-yourself.surge.sh/)
+The application can be found on [click](http://app.test-yourself.surge.sh/)
 
 Running test is not supported yet.
 
