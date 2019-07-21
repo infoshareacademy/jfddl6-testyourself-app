@@ -115,8 +115,8 @@ export const confirmedRegistrationPasswordChange = newValue => ({
 
 const INITIAL_STATE = {
     isUserLoggedIn: false,
-    email: '',
-    password: '',
+    email: 'example@example.com',
+    password: 'example',
     user: null,
 
     registrationEmail: '',
